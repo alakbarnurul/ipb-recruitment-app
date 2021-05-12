@@ -1,11 +1,11 @@
-<!-- List of Setup -->
+### List of Setup
 
 1. Setup Next.js - Material UI
 2. Setup jsconfig.json
 3. Setup ESlint and Prettier
 4. Setup Husky
 
-<!-- Stacks Main -->
+### Main Stacks
 
 1. Next.js
 2. Material UI
