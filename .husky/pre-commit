@@ -1,0 +1,23 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo '🔍🔍🔍 Check Format (Prettier) and ESLint'
+
+# Check Prettier
+yarn run check-prettier || (
+    echo '❌❌❌ Prettier Check Failed. Check the problems, then commit again.';
+    false;
+)
+echo '✅✅✅ Prettier checking success!'
+
+# Check ESLint
+yarn run check-eslint || (
+        echo '❌❌❌ ESLint Check Failed. Check the problems, then commit again.'
+        false; 
+)
+echo '✅✅✅ ESLint checking success!'
+
+# If everything passes... Now we can commit
+echo '-------------------------------------------------------------------------'
+echo 'Committing...❤️❤️❤️'
+echo '-------------------------------------------------------------------------'

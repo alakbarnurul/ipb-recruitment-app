@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      // Notes : @/public/* adalah alias (variabel) dan ./public/* adalah nilainya
+      "@/public/*": ["./public/*"],
+      "@/src/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/context/*": ["./src/context/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/utils/*": ["./src/utils/*"]
+    }
+  },
+  // Notes : exlude artinya adalah folder/file yang tidak ingin di execute oleh jsconfig.json agar tidak menyebabkan "lambat"
+  "exclude": [
+    "node_modules",
+    "dist",
+    "bower_components",
+    "tmp",
+    "temp ",
+    "jspm_packages"
+  ]
+}
