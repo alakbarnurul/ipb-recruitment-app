@@ -28,6 +28,7 @@ const NavigationBottom = (props) => {
   const [value, setValue] = useState(pathName)
   const isMaxWidth = useMediaQuery((theme) => theme.breakpoints.up('md'))
   const isMinWidth = useMediaQuery((theme) => theme.breakpoints.down('sm'))
+  if (!isMaxWidth && !isMinWidth) return null
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
@@ -42,9 +43,14 @@ const NavigationBottom = (props) => {
       onChange={handleChange}
       {...props}
     >
-      <BottomNavigationAction onClick={() => router.push('/history')} label='History' value='history' icon={<RestoreIcon />} />
-      <BottomNavigationAction onClick={() => router.push('/home')} label='Home' value='home' icon={<HomeIcon />} />
-      <BottomNavigationAction onClick={() => router.push('/profile')} label='Profile' value='profile' icon={<AccountCircleIcon />} />
+      <BottomNavigationAction onClick={() => router.replace('/history')} label='History' value='history' icon={<RestoreIcon />} />
+      <BottomNavigationAction onClick={() => router.replace('/home')} label='Home' value='home' icon={<HomeIcon />} />
+      <BottomNavigationAction
+        onClick={() => router.replace('/profile')}
+        label='Profile'
+        value='profile'
+        icon={<AccountCircleIcon />}
+      />
     </BottomNavigation>
   )
 }

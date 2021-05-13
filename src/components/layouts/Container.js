@@ -23,7 +23,7 @@ const Container = ({ children, header, footer, ...props }) => {
   )
 }
 Container.propTypes = {
-  children: PropTypes.element,
+  children: PropTypes.array || PropTypes.element,
   header: PropTypes.element,
   footer: PropTypes.element,
 }
