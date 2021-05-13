@@ -20,10 +20,7 @@ export default function MyApp(props) {
     <React.Fragment>
       <Head>
         <title>IPB Recruitment</title>
-        <meta
-          name='viewport'
-          content='minimum-scale=1, initial-scale=1, width=device-width'
-        />
+        <meta name='viewport' content='minimum-scale=1, initial-scale=1, width=device-width' />
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
