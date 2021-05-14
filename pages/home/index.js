@@ -1,10 +1,12 @@
-import React from 'react'
-import { Box } from '@material-ui/core'
+import React, { useEffect } from 'react'
+import { Box, useMediaQuery } from '@material-ui/core'
 import Container from '@/src/components/layouts/Container'
 import CardCampaign from '@/src/components/cards/CardCampaign'
 import NavigationTop from '@/components/layouts/NavigationTop'
 import NavigationBottom from '@/components/layouts/NavigationBottom'
 // import DebugText from '@/src/components/debugs/DebugText'
+import { useBreakpointsState } from '@/stores/index'
+import shallow from 'zustand/shallow'
 
 const dataCampaigns = [
   {
@@ -49,6 +51,13 @@ const dataCampaigns = [
   },
 ]
 export default function Home() {
+  const [setIsViewDownMd, setIsViewUpMd] = useBreakpointsState((state) => [state.setIsViewDownMd, state.setIsViewUpMd], shallow)
+  const isViewDownMd = useMediaQuery((theme) => theme.breakpoints.down('sm'))
+  const isViewUpMd = useMediaQuery((theme) => theme.breakpoints.up('md'))
+  useEffect(() => {
+    setIsViewDownMd(isViewDownMd)
+    setIsViewUpMd(isViewUpMd)
+  }, [isViewDownMd, isViewUpMd])
   return (
     <Box>
       <Container header={<NavigationTop />} footer={<NavigationBottom />}>

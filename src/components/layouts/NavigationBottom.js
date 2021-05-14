@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { BottomNavigation, BottomNavigationAction, useMediaQuery } from '@material-ui/core'
+import { BottomNavigation, BottomNavigationAction } from '@material-ui/core'
 import RestoreIcon from '@material-ui/icons/Restore'
 import HomeIcon from '@material-ui/icons/Home'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
+import { useBreakpointsState } from '@/stores/index'
+import shallow from 'zustand/shallow'
 
 const useStyles = makeStyles(({ breakpoints }) => ({
   root: {
@@ -26,17 +28,15 @@ const NavigationBottom = (props) => {
   const router = useRouter()
   const pathName = router.asPath.split('/')[1]
   const [value, setValue] = useState(pathName)
-  const isMaxWidth = useMediaQuery((theme) => theme.breakpoints.up('md'))
-  const isMinWidth = useMediaQuery((theme) => theme.breakpoints.down('sm'))
-  if (!isMaxWidth && !isMinWidth) return null
+  const [isViewDownMd, isViewUpMd] = useBreakpointsState((state) => [state.isViewDownMd, state.isViewUpMd], shallow)
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
   return (
     <BottomNavigation
       className={clsx(classes.root, {
-        [classes.maxWidth]: isMaxWidth,
-        [classes.minWidth]: isMinWidth,
+        [classes.maxWidth]: isViewUpMd,
+        [classes.minWidth]: isViewDownMd,
       })}
       value={value}
       showLabels

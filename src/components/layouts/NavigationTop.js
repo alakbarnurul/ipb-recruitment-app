@@ -1,7 +1,9 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { AppBar, Toolbar, Typography, Box, useMediaQuery } from '@material-ui/core'
+import { AppBar, Toolbar, Typography, Box } from '@material-ui/core'
 import clsx from 'clsx'
+import { useBreakpointsState } from '@/stores/index'
+import shallow from 'zustand/shallow'
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   root: {
@@ -21,17 +23,15 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   },
 }))
 
-export default function DenseAppBar() {
+const NavigationTop = (props) => {
   const classes = useStyles()
-  const isMaxWidth = useMediaQuery((theme) => theme.breakpoints.up('md'))
-  const isMinWidth = useMediaQuery((theme) => theme.breakpoints.down('sm'))
-  if (!isMaxWidth && !isMinWidth) return null
+  const [isViewDownMd, isViewUpMd] = useBreakpointsState((state) => [state.isViewDownMd, state.isViewUpMd], shallow)
   return (
-    <Box className={clsx(classes.root)}>
+    <Box className={clsx(classes.root)} {...props}>
       <AppBar
         className={clsx(classes.appBar, {
-          [classes.maxWidth]: isMaxWidth,
-          [classes.minWidth]: isMinWidth,
+          [classes.maxWidth]: isViewUpMd,
+          [classes.minWidth]: isViewDownMd,
         })}
         position='static'
       >
@@ -44,3 +44,5 @@ export default function DenseAppBar() {
     </Box>
   )
 }
+
+export default NavigationTop
