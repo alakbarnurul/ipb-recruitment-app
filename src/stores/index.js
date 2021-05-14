@@ -1,7 +1,7 @@
 import create from 'zustand'
 
 const useBreakpointsState = create((set) => ({
-  isViewUpMd: false,
+  isViewUpMd: true,
   isViewDownMd: false,
   setIsViewUpMd: (value) => set(() => ({ isViewUpMd: value })),
   setIsViewDownMd: (value) => set(() => ({ isViewDownMd: value })),
