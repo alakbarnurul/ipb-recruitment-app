@@ -18,7 +18,7 @@ const FormRegister = (props) => {
     passwordConfirm: '',
   }
   const validationSchema = Yup.object({
-    fullName: Yup.string().required('Your full name required'),
+    fullName: Yup.string().required('Full name required'),
     email: Yup.string().email().required('Email required'),
     password: Yup.string().required('Password required'),
     passwordConfirm: Yup.string()
@@ -85,7 +85,7 @@ const FormRegister = (props) => {
             <Grid item>
               <Box textAlign='right'>
                 <Typography variant='body2'>
-                  Do you ave an account?{' '}
+                  Do you have an account?{' '}
                   <Link href='/'>
                     <a>Login</a>
                   </Link>

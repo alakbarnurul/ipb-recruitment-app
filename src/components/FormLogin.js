@@ -67,7 +67,7 @@ const FormLogin = (props) => {
             <Grid item>
               <Box textAlign='right'>
                 <Typography variant='body2'>
-                  Don not have an account?{' '}
+                  Do not have an account?{' '}
                   <Link href='/register'>
                     <a>Register</a>
                   </Link>
