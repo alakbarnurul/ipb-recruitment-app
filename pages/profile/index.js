@@ -17,8 +17,6 @@ export default function Profile() {
   }, [isViewDownMd, isViewUpMd])
   return (
     <Container header={<NavigationTop />} footer={<NavigationBottom />}>
-      {/* Notes : Element Box untuk menghindari bug karena header dan foooter yang fixed position */}
-      <Box py={2} />
       <Box py={6} textAlign='center'>
         <Typography variant='subtitle1'>Login dulu sebelum masuk ke Profile</Typography>
         <Typography variant='h2'>Halaman Profile</Typography>

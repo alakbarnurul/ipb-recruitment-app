@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useBreakpointsState } from '@/src/stores/main'
 import shallow from 'zustand/shallow'
 
-export default function History() {
+export default function __Page() {
   const [setIsViewDownMd, setIsViewUpMd] = useBreakpointsState((state) => [state.setIsViewDownMd, state.setIsViewUpMd], shallow)
   const isViewDownMd = useMediaQuery((theme) => theme.breakpoints.down('sm'))
   const isViewUpMd = useMediaQuery((theme) => theme.breakpoints.up('md'))
@@ -18,12 +18,9 @@ export default function History() {
   return (
     <Container header={<NavigationTop />} footer={<NavigationBottom />}>
       <Box py={6} textAlign='center'>
-        <Typography variant='subtitle1'>Login dulu sebelum lihat history Anda</Typography>
-        <Typography variant='h2'>Halaman History</Typography>
-        <Box mt={6} />
         <Link href='/' replace passHref>
           <a>
-            <Typography variant='h2'>Kembali ke halaman Login</Typography>
+            <Typography variant='h2'>Back to home page</Typography>
           </a>
         </Link>
       </Box>

@@ -5,8 +5,18 @@ import NavigationTop from '@/src/components/NavigationTop'
 import NavigationBottom from '@/src/components/NavigationBottom'
 import shallow from 'zustand/shallow'
 import { useBreakpointsState } from '@/src/stores/main'
+import { DirectionsRun } from '@material-ui/icons'
+import { makeStyles } from '@material-ui/core/styles'
+import FormLogin from '@/components/FormLogin'
 
+const useStyles = makeStyles(({ spacing }) => ({
+  keyIcon: {
+    fontSize: spacing(6),
+    marginBottom: spacing(1),
+  },
+}))
 export default function Index() {
+  const classes = useStyles()
   const [setIsViewDownMd, setIsViewUpMd] = useBreakpointsState((state) => [state.setIsViewDownMd, state.setIsViewUpMd], shallow)
   const isViewDownMd = useMediaQuery((theme) => theme.breakpoints.down('sm'))
   const isViewUpMd = useMediaQuery((theme) => theme.breakpoints.up('md'))
@@ -16,10 +26,14 @@ export default function Index() {
   }, [isViewDownMd, isViewUpMd])
   return (
     <Container header={<NavigationTop />} footer={<NavigationBottom />}>
-      {/* Notes : Element Box untuk menghindari bug karena header dan foooter yang fixed position */}
-      <Box py={2} />
-      <Box py={6} textAlign='center'>
-        <Typography variant='h2'>Halaman Login</Typography>
+      {/* Header */}
+      <Box mt={12} textAlign='center'>
+        <DirectionsRun className={classes.keyIcon} />
+        <Typography variant='subtitle1'>Login to apply & find your passion!</Typography>
+      </Box>
+      {/* Main */}
+      <Box mt={5}>
+        <FormLogin />
       </Box>
     </Container>
   )

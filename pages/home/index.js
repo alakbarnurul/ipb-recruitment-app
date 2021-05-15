@@ -61,15 +61,11 @@ export default function Home() {
   return (
     <Box>
       <Container header={<NavigationTop />} footer={<NavigationBottom />}>
-        {/* Notes : Element Box untuk menghindari bug karena header dan foooter yang fixed position */}
-        <Box py={2} />
         <Box display='flex' alignItems='center' flexDirection='column'>
           {dataCampaigns.map((data) => (
             <CardCampaign key={data._id} campaignContent={data} />
           ))}
         </Box>
-        {/* Notes : Element Box untuk menghindari bug karena header dan foooter yang fixed position */}
-        <Box py={6} />
       </Container>
     </Box>
   )

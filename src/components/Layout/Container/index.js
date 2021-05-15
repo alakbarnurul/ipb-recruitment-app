@@ -10,21 +10,30 @@ const useStyles = makeStyles(({ spacing }) => ({
     minHeight: '100vh',
   },
 }))
-const Container = ({ children, header, footer, ...props }) => {
+const Container = ({ children, header, headerY, footer, footerY, ...props }) => {
   const classes = useStyles()
   return (
     <MuiContainer className={classes.rootContainer} maxWidth='md' disableGutters={true} {...props}>
       <Box>{header}</Box>
       <Paper className={classes.rootPaper} elevation={3}>
+        {/* Notes : Element Box dgn props headerY dan footerY untuk menghindari bug karena header dan foooter yang fixed position */}
+        <Box py={headerY} />
         {children}
+        <Box py={footerY} />
       </Paper>
       <Box>{footer}</Box>
     </MuiContainer>
   )
 }
 Container.propTypes = {
-  children: PropTypes.array || PropTypes.element,
-  header: PropTypes.element,
-  footer: PropTypes.element,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
+  header: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
+  footer: PropTypes.oneOfType([PropTypes.array, PropTypes.element]),
+  headerY: PropTypes.number,
+  footerY: PropTypes.number,
+}
+Container.defaultProps = {
+  headerY: 2,
+  footerY: 6,
 }
 export default Container
