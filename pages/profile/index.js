@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { Box, Typography, useMediaQuery } from '@material-ui/core'
-import Container from '@/components/layouts/Container'
-import NavigationTop from '@/components/layouts/NavigationTop'
-import NavigationBottom from '@/components/layouts/NavigationBottom'
+import Container from '@/src/components/Layout/Container'
+import NavigationTop from '@/src/components/NavigationTop'
+import NavigationBottom from '@/src/components/NavigationBottom'
 import Link from 'next/link'
-import { useBreakpointsState } from '@/stores/index'
+import { useBreakpointsState } from '@/src/stores/main'
 import shallow from 'zustand/shallow'
 
 export default function Profile() {

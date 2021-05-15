@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { Box, useMediaQuery } from '@material-ui/core'
-import Container from '@/src/components/layouts/Container'
-import CardCampaign from '@/src/components/cards/CardCampaign'
-import NavigationTop from '@/components/layouts/NavigationTop'
-import NavigationBottom from '@/components/layouts/NavigationBottom'
+import Container from '@/src/components/Layout/Container'
+import CardCampaign from '@/src/components/CardCampaign'
+import NavigationTop from '@/src/components/NavigationTop'
+import NavigationBottom from '@/src/components/NavigationBottom'
 // import DebugText from '@/src/components/debugs/DebugText'
-import { useBreakpointsState } from '@/stores/index'
+import { useBreakpointsState } from '@/src/stores/main'
 import shallow from 'zustand/shallow'
 
 const dataCampaigns = [

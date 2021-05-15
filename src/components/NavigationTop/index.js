@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Box } from '@material-ui/core'
 import clsx from 'clsx'
-import { useBreakpointsState } from '@/stores/index'
+import { useBreakpointsState } from '@/src/stores/main'
 import shallow from 'zustand/shallow'
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({

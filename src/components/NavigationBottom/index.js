@@ -6,7 +6,7 @@ import HomeIcon from '@material-ui/icons/Home'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
-import { useBreakpointsState } from '@/stores/index'
+import { useBreakpointsState } from '@/src/stores/main'
 import shallow from 'zustand/shallow'
 
 const useStyles = makeStyles(({ breakpoints }) => ({

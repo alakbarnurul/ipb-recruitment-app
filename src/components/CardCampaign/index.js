@@ -1,7 +1,7 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box, Chip, Card, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core'
-import Button from '@/src/components/buttons/Button'
+import Button from '@/src/components/Button'
 import EventIcon from '@material-ui/icons/Event'
 import PropTypes from 'prop-types'
 
