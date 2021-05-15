@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import * as Yup from 'yup'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 import Button from '@/components/Button'
 import { LinearProgress, Grid, Typography, Box } from '@material-ui/core'
 import Link from 'next/link'
+import axios from 'axios'
+import Alert from '@material-ui/lab/Alert'
 
 const FormLogin = (props) => {
+  const [alertMessage, setAlertMessage] = useState({ status: '', message: '' })
+  const [showAlert, setShowAlert] = useState(false)
   const initialValues = {
     email: '',
     password: '',
@@ -15,11 +19,20 @@ const FormLogin = (props) => {
     email: Yup.string().email().required('Email required'),
     password: Yup.string().required('Password required'),
   })
-  const handleLogin = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      console.log(values)
-      setSubmitting(false)
-    }, 2000)
+  const handleLogin = async ({ email, password }, { setSubmitting }) => {
+    await axios
+      .post('/api/auth/login', { email, password })
+      .then((response) => {
+        setAlertMessage({ status: 'success', message: 'Login successfully!' })
+        console.log(response)
+      })
+      .catch((error) => {
+        setAlertMessage({ status: 'error', message: 'User not found!' })
+        console.log(error.response)
+      })
+    setShowAlert(true)
+
+    setSubmitting(false)
   }
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleLogin}>
@@ -34,6 +47,11 @@ const FormLogin = (props) => {
           <Box my={3} textAlign='left'>
             <Typography variant='body1'>Please login with your student email (@apps.ipb.ac.id)</Typography>
           </Box>
+          {showAlert && (
+            <Box my={3}>
+              <Alert severity={alertMessage.status}>{alertMessage.message}</Alert>
+            </Box>
+          )}
           <Grid container direction='column' spacing={2}>
             <Grid item>
               <Field variant='outlined' fullWidth={true} component={TextField} name='email' type='email' label='Email' />
