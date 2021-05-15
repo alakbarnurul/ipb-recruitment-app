@@ -65,7 +65,7 @@ const __Form = (props) => {
             <Grid item>
               <Box textAlign='right'>
                 <Typography variant='body2'>
-                  Do you ave an account?{' '}
+                  Do you have an account?{' '}
                   <Link href='/register'>
                     <a>Login</a>
                   </Link>
