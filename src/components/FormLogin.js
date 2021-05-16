@@ -3,14 +3,23 @@ import * as Yup from 'yup'
 import { Formik, Form, Field } from 'formik'
 import { TextField } from 'formik-material-ui'
 import Button from '@/components/Button'
-import { LinearProgress, Grid, Typography, Box } from '@material-ui/core'
+import { LinearProgress, Grid, Typography, Box, CircularProgress } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
 import Link from 'next/link'
 import axios from 'axios'
-import Alert from '@material-ui/lab/Alert'
+import { Alert, AlertTitle } from '@material-ui/lab'
+import { useRouter } from 'next/router'
 
+const useStyles = makeStyles(({ spacing }) => ({
+  circularProgress: {
+    marginRight: spacing(1.5),
+  },
+}))
 const FormLogin = (props) => {
   const [alertMessage, setAlertMessage] = useState({ status: '', message: '' })
   const [showAlert, setShowAlert] = useState(false)
+  const router = useRouter()
+  const classes = useStyles()
   const initialValues = {
     email: '',
     password: '',
@@ -24,6 +33,9 @@ const FormLogin = (props) => {
       .post('/api/auth/login', { email, password })
       .then((response) => {
         setAlertMessage({ status: 'success', message: 'Login successfully!' })
+        setTimeout(() => {
+          router.push('/profile')
+        }, 2000)
         console.log(response)
       })
       .catch((error) => {
@@ -31,7 +43,6 @@ const FormLogin = (props) => {
         console.log(error.response)
       })
     setShowAlert(true)
-
     setSubmitting(false)
   }
   return (
@@ -47,9 +58,22 @@ const FormLogin = (props) => {
           <Box my={3} textAlign='left'>
             <Typography variant='body1'>Please login with your student email (@apps.ipb.ac.id)</Typography>
           </Box>
+          {/* Notes : Show alert for feedback */}
           {showAlert && (
             <Box my={3}>
-              <Alert severity={alertMessage.status}>{alertMessage.message}</Alert>
+              <Alert severity={alertMessage.status}>
+                {alertMessage.status === 'success' ? (
+                  <Box>
+                    <AlertTitle>{alertMessage.message}</AlertTitle>
+                    <Box display='flex' alignItems='center'>
+                      <CircularProgress className={classes.circularProgress} size={14} />
+                      <Typography variant='body2'>Wait a second, redirecting to dashboard...</Typography>
+                    </Box>
+                  </Box>
+                ) : (
+                  <Typography variant='body2'>{alertMessage.message}</Typography>
+                )}
+              </Alert>
             </Box>
           )}
           <Grid container direction='column' spacing={2}>

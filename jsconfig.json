@@ -3,7 +3,11 @@
     "baseUrl": ".",
     "paths": {
       // Notes : @/public/* adalah alias (variabel) dan ./public/* adalah nilainya
+      // Public folder
       "@/public/*": ["./public/*"],
+      // Pages folder
+      "@/api/*": ["./pages/api/*"],
+      // Src folder
       "@/src/*": ["./src/*"],
       "@/components/*": ["./src/components/*"],
       "@/context/*": ["./src/context/*"],
