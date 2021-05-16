@@ -32,7 +32,10 @@ const FormLogin = (props) => {
     await axios
       .post('/api/auth/login', { email, password })
       .then((response) => {
+        const { user, token } = response.data
         setAlertMessage({ status: 'success', message: 'Login successfully!' })
+        localStorage.setItem('current-user', JSON.stringify(user))
+        localStorage.setItem('auth-token', JSON.stringify(token))
         setTimeout(() => {
           router.push('/profile')
         }, 2000)

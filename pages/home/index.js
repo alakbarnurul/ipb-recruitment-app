@@ -4,9 +4,10 @@ import Container from '@/src/components/Layout/Container'
 import CardCampaign from '@/src/components/CardCampaign'
 import NavigationTop from '@/src/components/NavigationTop'
 import NavigationBottom from '@/src/components/NavigationBottom'
-// import DebugText from '@/src/components/debugs/DebugText'
-import { useBreakpointsState } from '@/src/stores/main'
+import { useStoreBreakpoints } from '@/src/stores/main'
 import shallow from 'zustand/shallow'
+import useCurrentUser from '@/hooks/useCurrentUser'
+import ProgressPage from '@/components/ProgressPage'
 
 const dataCampaigns = [
   {
@@ -50,14 +51,19 @@ const dataCampaigns = [
     },
   },
 ]
+
 export default function Home() {
-  const [setIsViewDownMd, setIsViewUpMd] = useBreakpointsState((state) => [state.setIsViewDownMd, state.setIsViewUpMd], shallow)
+  const [setIsViewDownMd, setIsViewUpMd] = useStoreBreakpoints((state) => [state.setIsViewDownMd, state.setIsViewUpMd], shallow)
   const isViewDownMd = useMediaQuery((theme) => theme.breakpoints.down('sm'))
   const isViewUpMd = useMediaQuery((theme) => theme.breakpoints.up('md'))
+  const { currentUser } = useCurrentUser()
   useEffect(() => {
     setIsViewDownMd(isViewDownMd)
     setIsViewUpMd(isViewUpMd)
   }, [isViewDownMd, isViewUpMd])
+  if (currentUser === null) {
+    return <ProgressPage />
+  }
   return (
     <Box>
       <Container header={<NavigationTop />} footer={<NavigationBottom />}>

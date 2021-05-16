@@ -1,10 +1,10 @@
 import create from 'zustand'
 
-const useBreakpointsState = create((set) => ({
+const useStoreBreakpoints = create((set) => ({
   isViewUpMd: true,
   isViewDownMd: false,
   setIsViewUpMd: (value) => set(() => ({ isViewUpMd: value })),
   setIsViewDownMd: (value) => set(() => ({ isViewDownMd: value })),
 }))
 
-export { useBreakpointsState }
+export { useStoreBreakpoints }

@@ -38,11 +38,14 @@ const FormRegister = (props) => {
     await axios
       .post('/api/auth/register', { fullName, email, password })
       .then((response) => {
-        console.log(response)
+        const { createdUserData, token } = response.data
         setAlertMessage({ status: 'success', message: 'Successfully registered' })
+        localStorage.setItem('current-user', JSON.stringify(createdUserData))
+        localStorage.setItem('auth-token', JSON.stringify(token))
         setTimeout(() => {
           router.push('/profile')
         }, 2000)
+        console.log(response)
       })
       .catch((error) => {
         console.log(error.response)

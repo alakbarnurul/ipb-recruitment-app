@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { AppBar, Toolbar, Typography, Box } from '@material-ui/core'
 import clsx from 'clsx'
-import { useBreakpointsState } from '@/src/stores/main'
+import { useStoreBreakpoints } from '@/src/stores/main'
 import shallow from 'zustand/shallow'
 
 const useStyles = makeStyles(({ spacing, breakpoints }) => ({
@@ -25,7 +25,7 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
 
 const NavigationTop = (props) => {
   const classes = useStyles()
-  const [isViewDownMd, isViewUpMd] = useBreakpointsState((state) => [state.isViewDownMd, state.isViewUpMd], shallow)
+  const [isViewDownMd, isViewUpMd] = useStoreBreakpoints((state) => [state.isViewDownMd, state.isViewUpMd], shallow)
   return (
     <Box className={clsx(classes.root)} {...props}>
       <AppBar
