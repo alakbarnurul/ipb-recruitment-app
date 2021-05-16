@@ -64,7 +64,7 @@ const FormRegister = (props) => {
               <LinearProgress />
             </Box>
           )}
-          <Box my={3} textAlign='left'>
+          <Box my={2} textAlign='left'>
             <Typography variant='body1'>Have a nice day</Typography>
           </Box>
           {/* Notes : Show alert for feedback */}

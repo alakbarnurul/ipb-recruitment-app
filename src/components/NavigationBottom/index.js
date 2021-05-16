@@ -6,14 +6,14 @@ import HomeIcon from '@material-ui/icons/Home'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
-import { useStoreBreakpoints } from '@/src/stores/main'
-import shallow from 'zustand/shallow'
+import useBreakpoints from '@/hooks/useBreakpoints'
 
 const useStyles = makeStyles(({ breakpoints }) => ({
   root: {
     position: 'fixed',
     bottom: 0,
     borderTop: '1px solid #D1D5DB',
+    zIndex: 99,
   },
   maxWidth: {
     width: breakpoints.values.md,
@@ -28,15 +28,15 @@ const NavigationBottom = (props) => {
   const router = useRouter()
   const pathName = router.asPath.split('/')[1]
   const [value, setValue] = useState(pathName)
-  const [isViewDownMd, isViewUpMd] = useStoreBreakpoints((state) => [state.isViewDownMd, state.isViewUpMd], shallow)
+  const { isUp, isDown } = useBreakpoints()
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
   return (
     <BottomNavigation
       className={clsx(classes.root, {
-        [classes.maxWidth]: isViewUpMd,
-        [classes.minWidth]: isViewDownMd,
+        [classes.maxWidth]: isUp,
+        [classes.minWidth]: isDown,
       })}
       value={value}
       showLabels

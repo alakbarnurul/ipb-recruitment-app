@@ -58,7 +58,7 @@ const FormLogin = (props) => {
               <LinearProgress />
             </Box>
           )}
-          <Box my={3} textAlign='left'>
+          <Box my={2} textAlign='left'>
             <Typography variant='body1'>Please login with your student email (@apps.ipb.ac.id)</Typography>
           </Box>
           {/* Notes : Show alert for feedback */}

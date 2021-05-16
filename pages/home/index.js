@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react'
-import { Box, useMediaQuery } from '@material-ui/core'
+import React from 'react'
+import { Box } from '@material-ui/core'
 import Container from '@/src/components/Layout/Container'
 import CardCampaign from '@/src/components/CardCampaign'
 import NavigationTop from '@/src/components/NavigationTop'
 import NavigationBottom from '@/src/components/NavigationBottom'
-import { useStoreBreakpoints } from '@/src/stores/main'
-import shallow from 'zustand/shallow'
 import useCurrentUser from '@/hooks/useCurrentUser'
-import ProgressPage from '@/components/ProgressPage'
+import PageProgress from '@/src/components/PageProgress'
 
 const dataCampaigns = [
   {
@@ -53,16 +51,9 @@ const dataCampaigns = [
 ]
 
 export default function Home() {
-  const [setIsViewDownMd, setIsViewUpMd] = useStoreBreakpoints((state) => [state.setIsViewDownMd, state.setIsViewUpMd], shallow)
-  const isViewDownMd = useMediaQuery((theme) => theme.breakpoints.down('sm'))
-  const isViewUpMd = useMediaQuery((theme) => theme.breakpoints.up('md'))
   const { currentUser } = useCurrentUser()
-  useEffect(() => {
-    setIsViewDownMd(isViewDownMd)
-    setIsViewUpMd(isViewUpMd)
-  }, [isViewDownMd, isViewUpMd])
   if (currentUser === null) {
-    return <ProgressPage />
+    return <PageProgress />
   }
   return (
     <Box>

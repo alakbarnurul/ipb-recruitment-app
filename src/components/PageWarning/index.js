@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { useStoreBreakpoints } from '@/src/stores/main'
 import shallow from 'zustand/shallow'
 
-const WarningPage = () => {
+const PageWarning = () => {
   const [setIsViewDownMd, setIsViewUpMd] = useStoreBreakpoints((state) => [state.setIsViewDownMd, state.setIsViewUpMd], shallow)
   const isViewDownMd = useMediaQuery((theme) => theme.breakpoints.down('sm'))
   const isViewUpMd = useMediaQuery((theme) => theme.breakpoints.up('md'))
@@ -30,4 +30,4 @@ const WarningPage = () => {
   )
 }
 
-export default WarningPage
+export default PageWarning
