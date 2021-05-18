@@ -101,7 +101,7 @@ const FormRegister = (props) => {
                 fullWidth={true}
                 component={TextField}
                 type='password'
-                label='Password'
+                label='Password Confirmation'
                 name='passwordConfirm'
               />
             </Grid>

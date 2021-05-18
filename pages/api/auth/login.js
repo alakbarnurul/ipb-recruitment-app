@@ -30,6 +30,7 @@ export default async function loginHandler(req, res) {
       throw new Error('User not found!')
     }
     const token = createToken(isUserEmailExist[0].id)
+    // Notes : Bisa juga nge-set cookies tanpa library memakai setHeader https://www.youtube.com/watch?v=w8n7Soz7khw (menit ke-5)
     cookies.set('auth-token', token, {
       expires: days,
       httpOnly: true,
