@@ -29,8 +29,10 @@ const FormLogin = (props) => {
     password: Yup.string().required('Password required'),
   })
   const handleLogin = async ({ email, password }, { setSubmitting }) => {
+    // Fix/Bugs : role params is harcoded
+    const role = 'student'
     await axios
-      .post('/api/auth/login', { email, password })
+      .post(`/api/auth/login/${role}`, { email, password })
       .then((response) => {
         const { user, token } = response.data
         setAlertMessage({ status: 'success', message: 'Login successfully!' })

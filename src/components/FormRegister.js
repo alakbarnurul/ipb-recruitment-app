@@ -23,20 +23,24 @@ const FormRegister = (props) => {
   const initialValues = {
     fullName: '',
     email: '',
+    nim: '',
     password: '',
     passwordConfirm: '',
   }
   const validationSchema = Yup.object({
     fullName: Yup.string().required('Full name required'),
     email: Yup.string().email().required('Email required'),
+    nim: Yup.string().required('Email required'),
     password: Yup.string().required('Password required'),
     passwordConfirm: Yup.string()
       .oneOf([Yup.ref('password'), ''], 'Password does not match')
       .required('Confirmation password required'),
   })
-  const handleRegister = async ({ fullName, email, password }, { setSubmitting }) => {
+  const handleRegister = async ({ fullName, email, nim, password }, { setSubmitting }) => {
+    // Fix/Bugs : role params is harcoded
+    const role = 'student'
     await axios
-      .post('/api/auth/register', { fullName, email, password })
+      .post(`/api/auth/register/${role}`, { fullName, email, nim, password })
       .then((response) => {
         const { createdUserData, token } = response.data
         setAlertMessage({ status: 'success', message: 'Successfully registered' })
@@ -64,9 +68,9 @@ const FormRegister = (props) => {
               <LinearProgress />
             </Box>
           )}
-          <Box my={2} textAlign='left'>
+          {/* <Box my={2} textAlign='left'>
             <Typography variant='body1'>Have a nice day</Typography>
-          </Box>
+          </Box> */}
           {/* Notes : Show alert for feedback */}
           {showAlert && (
             <Box my={3}>
@@ -91,6 +95,9 @@ const FormRegister = (props) => {
             </Grid>
             <Grid item>
               <Field variant='outlined' fullWidth={true} component={TextField} name='email' type='email' label='Email' />
+            </Grid>
+            <Grid item>
+              <Field variant='outlined' fullWidth={true} component={TextField} name='nim' type='text' label='Student ID (NIM)' />
             </Grid>
             <Grid item>
               <Field variant='outlined' fullWidth={true} component={TextField} type='password' label='Password' name='password' />

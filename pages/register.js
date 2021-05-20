@@ -12,7 +12,7 @@ import PageProgress from '@/src/components/PageProgress'
 
 const useStyles = makeStyles(({ spacing }) => ({
   keyIcon: {
-    fontSize: spacing(6),
+    fontSize: spacing(5),
     marginBottom: spacing(1),
   },
 }))
@@ -35,7 +35,7 @@ export default function Register() {
         <Typography variant='subtitle1'>Kuy! Join with us!</Typography>
       </Box>
       {/* Main */}
-      <Box mt={3}>
+      <Box mt={2}>
         <FormRegister />
       </Box>
     </Container>

@@ -2,17 +2,111 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./user.db"
+  provider          = "postgresql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 generator client {
   provider = "prisma-client-js"
 }
 
-model User {
-  id String @id @default(cuid())
-  fullName String
-  email String 
-  password String
+model Student {
+  // Attributes
+  id            String     @id @default(cuid())
+  fullName      String
+  imageUrl      String?
+  gender        Boolean?
+  nim           String     @unique
+  yearOfCollege DateTime?
+  email         String     @unique
+  password      String
+  userRole      Role       @default(student)
+  birthDate     DateTime?
+  faculty       String?
+  department    String?
+  phoneNumber   String?
+  createdAt     DateTime?  @default(now())
+  // Relations
+  history       History[]
+  campaigns     Campaign[]
+}
+
+model History {
+  // Attributes
+  id           String    @id @default(cuid())
+  status       Json?
+  registerDate DateTime?
+  createdAt    DateTime? @default(now())
+  // Relations
+  Student      Student?  @relation(fields: [studentId], references: [id])
+  studentId    String?
+  campaign     Campaign? @relation(fields: [campaignId], references: [id])
+  campaignId   String?
+}
+
+model Campaign {
+  // Attributes
+  id                 String        @id @default(cuid())
+  title              String?
+  status             Boolean?
+  imageUrl           String?
+  positions          Json?
+  description        String?
+  timeline           Json?
+  generalRequirement String?
+  dateClosed         DateTime?
+  createdAt          DateTime?     @default(now())
+  // Relations
+  applicantHistory   History[]
+  formData           Form?
+  applicantManager   Applicant?
+  organization       Organization? @relation(fields: [organizationId], references: [id])
+  organizationId     String?
+  students           Student[]
+}
+
+model Form {
+  // Attributes
+  id          String    @id @default(cuid())
+  title       String?
+  description String?
+  fields      Json?
+  formUrl     String?
+  createdAt   DateTime? @default(now())
+  // Relations
+  campaign    Campaign? @relation(fields: [campaignId], references: [id])
+  campaignId  String?
+}
+
+model Applicant {
+  // Attributes
+  id         String    @id @default(cuid())
+  // Relations
+  campaign   Campaign? @relation(fields: [campaignId], references: [id])
+  campaignId String?
+}
+
+model Organization {
+  // Attributes
+  id            String     @id @default(cuid())
+  name          String?
+  email         String?
+  password      String?
+  userRole      Role       @default(organization)
+  period        String?
+  startPeriod   DateTime?
+  endPeriod     DateTime?
+  cabinet       String?
+  faculty       String?
+  department    String?
+  bio           String?
+  contactPerson String?
+  // Relations
+  campaigns     Campaign[]
+}
+
+enum Role {
+  student
+  organization
 }

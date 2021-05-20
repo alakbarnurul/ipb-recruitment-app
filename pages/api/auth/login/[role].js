@@ -8,6 +8,7 @@ export default async function loginHandler(req, res) {
   const { email, password } = req.body
   const cookies = new Cookies(req, res)
   const days = new Date()
+  const { role } = req.query
   // Notes: Set expiry for token to 1 month
   days.setDate(days.getDate() + 30)
   if (req.method !== 'POST') {
@@ -18,9 +19,15 @@ export default async function loginHandler(req, res) {
       error: 'Fields are required',
     })
   }
+  // Check roles
+  if (!['student', 'organization'].includes(role.toLowerCase())) {
+    return res.status(400).json({
+      message: 'Role not allowed,',
+    })
+  }
   try {
     // Notes : Response dari method .findMany adalah array
-    const isUserEmailExist = await prisma.user.findMany({
+    const isUserEmailExist = await prisma[role.toLowerCase()].findMany({
       where: {
         email: String(email),
       },

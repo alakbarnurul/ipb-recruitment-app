@@ -10,7 +10,8 @@ import PageProgress from '@/src/components/PageProgress'
 const dataCampaigns = [
   {
     _id: 'x0981;',
-    imageUrl: '/images/pictures/picture01.jpg',
+    imageUrl:
+      'https://images.unsplash.com/photo-1621306558057-1d040ee57bb9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
     title: 'IT Today 2021',
     status: true,
     dateClosed: '2020-01-01',

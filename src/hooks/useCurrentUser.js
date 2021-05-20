@@ -16,7 +16,7 @@ const useCurrentUser = () => {
     const tokenVerification = async () => {
       await axios
         // Notes : restoredToken with split remove "" from first and last char (BUG)
-        .post('/api/auth/authorization', { clientToken: restoredToken.split('"')[1] })
+        .post('/api/auth', { clientToken: restoredToken.split('"')[1] })
         .then(() => {})
         .catch(() => setIsError(true))
     }

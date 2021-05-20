@@ -4,12 +4,12 @@ import bcrypt from 'bcrypt'
 import createToken from '@/api/utils/createToken'
 
 const prisma = new PrismaClient()
-export default async function registerHandler(req, res) {
+export default async function studentRegisterHandler(req, res) {
   const cookies = new Cookies(req, res)
   const days = new Date()
   // Notes: Set expiry for token to 1 month
   days.setDate(days.getDate() + 30)
-  const { fullName, email, password } = req.body
+  const { fullName, email, nim, password } = req.body
   // Notes : Hashing user password with bcrypt
   const salt = await bcrypt.genSalt()
   const encryptedPassword = await bcrypt.hash(password, salt)
@@ -18,12 +18,12 @@ export default async function registerHandler(req, res) {
   }
   if (!fullName || !email || !encryptedPassword) {
     return res.status(400).json({
-      error: 'Fields are required',
+      message: 'Fields are required',
     })
   }
   try {
-    const createdUserData = await prisma.user.create({
-      data: { fullName, email, password: encryptedPassword },
+    const createdUserData = await prisma.student.create({
+      data: { fullName, email, nim, password: encryptedPassword },
     })
     const token = createToken(createdUserData.id)
     cookies.set('auth-token', token, {
@@ -38,10 +38,8 @@ export default async function registerHandler(req, res) {
     })
   } catch (error) {
     return res.status(400).json({
-      error: {
-        message: 'Failed to create account',
-        detailsError: error.message,
-      },
+      message: 'Failed to create account',
+      detailsError: error.message,
     })
   }
 }
