@@ -6,52 +6,38 @@ import NavigationTop from '@/src/components/NavigationTop'
 import NavigationBottom from '@/src/components/NavigationBottom'
 import useCurrentUser from '@/hooks/useCurrentUser'
 import PageProgress from '@/src/components/PageProgress'
+import { PrismaClient } from '@prisma/client'
+import PropTypes from 'prop-types'
 
-const dataCampaigns = [
-  {
-    _id: 'x0981;',
-    imageUrl:
-      'https://images.unsplash.com/photo-1621306558057-1d040ee57bb9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
-    title: 'IT Today 2021',
-    status: true,
-    dateClosed: '2020-01-01',
-    description: ` IT Today 2021 is an international technology event held by the Department of Computer Science IPB collaborating with IPB
-    University Computer Science Student Association. This year, IT Today brings "The Synergy Between Technology and Agro-Maritime
-    5.0" as a theme. Presenting various events such as International Seminar, Community Seminars, and Workshop along with
-    Competition such as HackToday, UXToday, and IT Business Competition.`,
-    organizer: {
-      _id: 'y0891',
-      name: 'Himalkom 20/21 - Kabinet Notion',
-      periodeStart: '2020-06-06',
-      periodeEnd: '2021-06-06',
-      email: 'himalkom@ipb.oprec.id',
-      department: 'Ilmu Komputer',
-      faculty: 'FMIPA',
+const prisma = new PrismaClient()
+export async function getStaticProps() {
+  const rawCampaigns = await prisma.campaign.findMany({
+    include: {
+      Organization: true,
     },
-  },
-  {
-    _id: 'x1981;',
-    imageUrl: '/images/pictures/picture02.jpg',
-    title: 'Pengurus BEM Fema 2021',
-    status: false,
-    dateClosed: '2020-01-01',
-    description: ` EM FEMA Kabinet HERO memiliki tagline yang akan menemani perjalanan ini ke depannya. 
-    Dengan semangat tagline ini, ke depannya diharapkan Kabinet HERO dapat berproses bersama dari nol unt
-    uk menjadi pahlawan FEMA dengan dedikasi tinggi serta torehan-torehan prestasi membanggakan yang kita aka
-    n ukir bersama kedepannya.`,
-    organizer: {
-      _id: 'y0892',
-      name: 'BEM Fema 20/21 - Kabinet Hero',
-      periodeStart: '2020-06-06',
-      periodeEnd: '2021-06-06',
-      email: 'bem.fema@ipb.oprec.id',
-      department: '-',
-      faculty: 'FEMA',
+  })
+  const campaigns = rawCampaigns.map((campaign) => ({
+    ...campaign,
+    dateClosed: campaign?.dateClosed?.toISOString().split('T')[0],
+    createdAt: campaign?.createdAt?.toISOString().split('T')[0],
+    Organization: {
+      ...campaign?.Organization,
+      startPeriod: campaign?.Organization?.startPeriod?.toISOString().split('T')[0],
+      endPeriod: campaign?.Organization?.endPeriod?.toISOString().split('T')[0],
     },
-  },
-]
-
-export default function Home() {
+  }))
+  if (!campaigns) {
+    return {
+      notFound: true,
+    }
+  }
+  return {
+    props: {
+      campaigns,
+    },
+  }
+}
+export default function Home({ campaigns }) {
   const { currentUser } = useCurrentUser()
   if (currentUser === null) {
     return <PageProgress />
@@ -60,11 +46,14 @@ export default function Home() {
     <Box>
       <Container header={<NavigationTop />} footer={<NavigationBottom />}>
         <Box display='flex' alignItems='center' flexDirection='column'>
-          {dataCampaigns.map((data) => (
-            <CardCampaign key={data._id} campaignContent={data} />
+          {campaigns.map((campaign) => (
+            <CardCampaign key={campaign.id} campaignContent={campaign} />
           ))}
         </Box>
       </Container>
     </Box>
   )
+}
+Home.propTypes = {
+  campaigns: PropTypes.array,
 }

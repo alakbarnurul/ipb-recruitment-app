@@ -2,9 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 datasource db {
-  provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -21,7 +20,7 @@ model Student {
   yearOfCollege DateTime?
   email         String     @unique
   password      String
-  userRole      Role       @default(student)
+  role          Role       @default(student)
   birthDate     DateTime?
   faculty       String?
   department    String?
@@ -41,7 +40,7 @@ model History {
   // Relations
   Student      Student?  @relation(fields: [studentId], references: [id])
   studentId    String?
-  campaign     Campaign? @relation(fields: [campaignId], references: [id])
+  Campaign     Campaign? @relation(fields: [campaignId], references: [id])
   campaignId   String?
 }
 
@@ -59,9 +58,9 @@ model Campaign {
   createdAt          DateTime?     @default(now())
   // Relations
   applicantHistory   History[]
-  formData           Form?
+  registerForm       Form?
   applicantManager   Applicant?
-  organization       Organization? @relation(fields: [organizationId], references: [id])
+  Organization       Organization? @relation(fields: [organizationId], references: [id])
   organizationId     String?
   students           Student[]
 }
@@ -75,7 +74,7 @@ model Form {
   formUrl     String?
   createdAt   DateTime? @default(now())
   // Relations
-  campaign    Campaign? @relation(fields: [campaignId], references: [id])
+  Campaign    Campaign? @relation(fields: [campaignId], references: [id])
   campaignId  String?
 }
 
@@ -83,7 +82,7 @@ model Applicant {
   // Attributes
   id         String    @id @default(cuid())
   // Relations
-  campaign   Campaign? @relation(fields: [campaignId], references: [id])
+  Campaign   Campaign? @relation(fields: [campaignId], references: [id])
   campaignId String?
 }
 
@@ -93,7 +92,7 @@ model Organization {
   name          String?
   email         String?
   password      String?
-  userRole      Role       @default(organization)
+  role          Role       @default(organization)
   period        String?
   startPeriod   DateTime?
   endPeriod     DateTime?

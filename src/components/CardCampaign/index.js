@@ -4,6 +4,7 @@ import { Box, Chip, Card, CardActions, CardContent, CardMedia, Typography } from
 import Button from '@/src/components/Button'
 import EventIcon from '@material-ui/icons/Event'
 import PropTypes from 'prop-types'
+import Link from 'next/link'
 
 const useStyles = makeStyles(({ spacing }) => ({
   campaignRoot: {
@@ -20,7 +21,7 @@ const useStyles = makeStyles(({ spacing }) => ({
     fontSize: 14,
     fontWeight: 800,
   },
-  campaignOrganizer: {
+  campaignOrganization: {
     fontSize: 16,
   },
   campaignDescription: {
@@ -44,7 +45,7 @@ const useStyles = makeStyles(({ spacing }) => ({
 }))
 
 const CardCampaign = ({ campaignContent, ...props }) => {
-  const { imageUrl, title, status, organizer, dateClosed, description } = campaignContent
+  const { id, imageUrl, title, status, Organization, dateClosed, description } = campaignContent
   const classes = useStyles()
   return (
     <Card className={classes.campaignRoot} {...props}>
@@ -78,8 +79,8 @@ const CardCampaign = ({ campaignContent, ...props }) => {
             />
           )}
         </Box>
-        <Typography className={classes.campaignOrganizer} gutterBottom variant='subtitle1' component='h2'>
-          {organizer.name}
+        <Typography className={classes.campaignOrganization} gutterBottom variant='subtitle1' component='h2'>
+          {Organization?.name}
         </Typography>
         <Box display='flex' alignItems='center'>
           <EventIcon />
@@ -94,7 +95,9 @@ const CardCampaign = ({ campaignContent, ...props }) => {
       </CardContent>
       <CardActions className={classes.campaignActions}>
         <Button className={classes.campaignButtonDetail}>
-          <Typography variant='subtitle2'>Apply</Typography>
+          <Link href={`/home/campaign/${id}`} passHref>
+            <Typography variant='subtitle2'>Apply</Typography>
+          </Link>
         </Button>
       </CardActions>
     </Card>

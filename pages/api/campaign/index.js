@@ -37,7 +37,7 @@ export default async function createCampaigHandler(req, res) {
         generalRequirement,
         dateClosed: new Date(dateClosed),
         // Fix/Bugs : Jgn lupa masukin id dari entitas Form dan ApplicantManagaer
-        organization: {
+        Organization: {
           connect: {
             id: String(isOrganizationRole[0].id),
           },
