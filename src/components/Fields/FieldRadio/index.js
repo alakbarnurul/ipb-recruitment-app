@@ -9,7 +9,7 @@ const FieldRadio = (props) => {
   const { isSubmitting } = formikProps
   // Notes : Radio button harus menggunakan initial value
   const [value, setValue] = useState(options[0].value)
-  const handleSetValue = (e) => setValue(Number(e.target.value))
+  const handleSetValue = (e) => setValue(e.target.value)
   useEffect(() => {
     // Notes : Radio button harus menggunakan initial value
     formikProps.setFieldValue(name, options[0].value)
@@ -23,7 +23,7 @@ const FieldRadio = (props) => {
         {options.map((option) => (
           <FormControlLabel
             key={option.title}
-            value={option.value}
+            value={String(option.value)}
             onClick={handleSetValue}
             control={<Radio disabled={isSubmitting} />}
             label={option.title}
