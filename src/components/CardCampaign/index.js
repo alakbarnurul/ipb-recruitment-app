@@ -9,7 +9,6 @@ import Link from 'next/link'
 const useStyles = makeStyles(({ spacing }) => ({
   campaignRoot: {
     maxWidth: 345,
-    marginTop: spacing(8),
   },
   campaignBanner: {
     height: 200,

@@ -10,6 +10,8 @@ import NavigationBottom from '@/src/components/NavigationBottom'
 import Container from '@/src/components/Layout/Container'
 import { PrismaClient } from '@prisma/client'
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@material-ui/lab'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 const prisma = new PrismaClient()
 const useStyles = makeStyles(({ spacing }) => ({
@@ -64,12 +66,13 @@ export default function Campaign({ campaign }) {
   const { Organization, imageUrl, title, timeline, description, generalRequirement, positions } = campaign[0]
   const { currentUser } = useCurrentUser()
   const classes = useStyles()
+  const router = useRouter()
   if (currentUser === null) {
     return <PageProgress />
   }
   return (
     <Box>
-      <Container header={<NavigationTop />} headerY={5} footer={<NavigationBottom />}>
+      <Container header={<NavigationTop />} footer={<NavigationBottom />}>
         <Card>
           <CardMedia image={imageUrl} title='Campaign Banner' style={{ paddingTop: '56.25%' }} />
         </Card>
@@ -107,13 +110,14 @@ export default function Campaign({ campaign }) {
               Deskripsi
             </Typography>
             <Typography variant='body2' align='justify'>
-              {description} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel dignissimos perspiciatis maiores cumque,
-              quibusdam incidunt possimus magni, aut ea, quo vitae voluptates iusto quisquam ipsam consectetur sapiente earum alias
-              pariatur eos. Itaque quaerat maxime, possimus dolore quisquam reprehenderit rem aspernatur adipisci quis iure cumque enim
-              aliquid eveniet rerum qui totam velit deleniti beatae? Porro quas sapiente dignissimos odit aperiam debitis architecto
-              quae, ipsa animi nobis, quisquam vitae. Quia nobis repellat in aut asperiores quidem alias, voluptatibus totam nihil
-              quaerat fuga doloremque. Eos, inventore. Consequatur hic, nesciunt harum corrupti earum perferendis iure reiciendis, qui
-              quas incidunt tenetur odio, voluptates cumque. Officiis.
+              {description} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel dignissimos perspiciatis maiores
+              cumque, quibusdam incidunt possimus magni, aut ea, quo vitae voluptates iusto quisquam ipsam consectetur
+              sapiente earum alias pariatur eos. Itaque quaerat maxime, possimus dolore quisquam reprehenderit rem aspernatur
+              adipisci quis iure cumque enim aliquid eveniet rerum qui totam velit deleniti beatae? Porro quas sapiente
+              dignissimos odit aperiam debitis architecto quae, ipsa animi nobis, quisquam vitae. Quia nobis repellat in aut
+              asperiores quidem alias, voluptatibus totam nihil quaerat fuga doloremque. Eos, inventore. Consequatur hic,
+              nesciunt harum corrupti earum perferendis iure reiciendis, qui quas incidunt tenetur odio, voluptates cumque.
+              Officiis.
             </Typography>
           </Box>
         </Box>
@@ -141,9 +145,11 @@ export default function Campaign({ campaign }) {
           </Box>
         </Box>
         <Box mt={5}>
-          <Button variant='contained' color='primary' fullWidth>
-            Apply
-          </Button>
+          <Link href={`/home/campaign/form/${router?.query?.id}`} passHref>
+            <Button variant='contained' color='primary' fullWidth>
+              <Typography variant='subtitle2'>Apply</Typography>
+            </Button>
+          </Link>
         </Box>
       </Container>
     </Box>

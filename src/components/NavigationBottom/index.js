@@ -43,7 +43,12 @@ const NavigationBottom = (props) => {
       onChange={handleChange}
       {...props}
     >
-      <BottomNavigationAction onClick={() => router.replace('/history')} label='History' value='history' icon={<RestoreIcon />} />
+      <BottomNavigationAction
+        onClick={() => router.replace('/history')}
+        label='History'
+        value='history'
+        icon={<RestoreIcon />}
+      />
       <BottomNavigationAction onClick={() => router.replace('/home')} label='Home' value='home' icon={<HomeIcon />} />
       <BottomNavigationAction
         onClick={() => router.replace('/profile')}

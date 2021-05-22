@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box } from '@material-ui/core'
+import { Box, Grid } from '@material-ui/core'
 import Container from '@/src/components/Layout/Container'
 import CardCampaign from '@/src/components/CardCampaign'
 import NavigationTop from '@/src/components/NavigationTop'
@@ -46,9 +46,13 @@ export default function Home({ campaigns }) {
     <Box>
       <Container header={<NavigationTop />} footer={<NavigationBottom />}>
         <Box display='flex' alignItems='center' flexDirection='column'>
-          {campaigns.map((campaign) => (
-            <CardCampaign key={campaign.id} campaignContent={campaign} />
-          ))}
+          <Grid container direction='column' spacing={5} alignItems='center'>
+            {campaigns.map((campaign) => (
+              <Grid key={campaign.id} item>
+                <CardCampaign campaignContent={campaign} />
+              </Grid>
+            ))}
+          </Grid>
         </Box>
       </Container>
     </Box>

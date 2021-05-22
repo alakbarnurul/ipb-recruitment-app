@@ -23,6 +23,8 @@
     "cookies": "^0.8.0",
     "formik": "^2.2.6",
     "formik-material-ui": "^3.0.1",
+    "formik-material-ui-lab": "^0.0.8",
+    "formik-material-ui-pickers": "^0.0.12",
     "jsonwebtoken": "^8.5.1",
     "next": "10.2.0",
     "prop-types": "^15.7.2",

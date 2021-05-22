@@ -33,7 +33,7 @@ Container.propTypes = {
   footerY: PropTypes.number,
 }
 Container.defaultProps = {
-  headerY: 2,
-  footerY: 6,
+  headerY: 5,
+  footerY: 5,
 }
 export default Container

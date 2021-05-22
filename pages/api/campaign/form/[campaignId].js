@@ -6,7 +6,8 @@ export default async function createCampaigHandler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' })
   }
-  const { clientToken, title, imageUrl, positions, description, timeline, generalRequirement, dateClosed } = req.body
+  const { campaignId } = req.query
+  const { clientToken, title, description, fields, formUrl } = req.body
   //   Auth Token
   const { data: organization, status } = verificationToken(clientToken)
   if (!status) {
@@ -25,35 +26,30 @@ export default async function createCampaigHandler(req, res) {
       throw new Error('Role not allowed, you are not Organization role!')
     }
     // Create Campaign
-    const createdCampaign = await prisma.campaign.create({
+    const createdForm = await prisma.form.create({
       data: {
         title,
-        status: true,
-        imageUrl,
-        positions,
         description,
-        // Fix/Bugs : To set field data type in JSON use extendedProfile (Prisma Docs)
-        timeline,
-        generalRequirement,
-        dateClosed: new Date(dateClosed),
-        // Fix/Bugs : Jgn lupa masukin id dari entitas Form dan ApplicantManagaer
-        Organization: {
+        // Notes : fields isinya harus {label, type}
+        fields,
+        formUrl,
+        Campaign: {
           connect: {
-            id: String(isOrganizationRole[0].id),
+            id: String(campaignId),
           },
         },
       },
     })
     return res.status(200).json({
       status: 'Campaign was successfully created',
-      createdCampaign,
+      createdForm,
       isOrganizationRole,
-      organizationId: organization.user.id,
+      organizationId: campaignId,
     })
   } catch (error) {
     return res.status(400).json({
       error: {
-        message: 'Failed to create campaign',
+        message: 'Failed to create form',
         detailsError: error.message,
       },
     })

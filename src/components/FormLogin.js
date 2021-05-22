@@ -86,10 +86,24 @@ const FormLogin = (props) => {
               <Field variant='outlined' fullWidth={true} component={TextField} name='email' type='email' label='Email' />
             </Grid>
             <Grid item>
-              <Field variant='outlined' fullWidth={true} component={TextField} type='password' label='Password' name='password' />
+              <Field
+                variant='outlined'
+                fullWidth={true}
+                component={TextField}
+                type='password'
+                label='Password'
+                name='password'
+              />
             </Grid>
             <Grid item>
-              <Button fullWidth={true} type='submit' variant='contained' color='primary' disabled={isSubmitting} onClick={submitForm}>
+              <Button
+                fullWidth={true}
+                type='submit'
+                variant='contained'
+                color='primary'
+                disabled={isSubmitting}
+                onClick={submitForm}
+              >
                 <Typography variant='subtitle1'>Login</Typography>
               </Button>
             </Grid>
