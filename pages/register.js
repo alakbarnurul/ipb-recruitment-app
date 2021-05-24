@@ -30,7 +30,7 @@ export default function Register() {
   return (
     <Container header={<NavigationTop />} footer={<NavigationBottom />}>
       {/* Header */}
-      <Box mt={8} textAlign='center'>
+      <Box mt={3} textAlign='center'>
         <EmojiPeople className={classes.keyIcon} />
         <Typography variant='subtitle1'>Kuy! Join with us!</Typography>
       </Box>

@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
 import { ThemeProvider } from '@material-ui/core/styles'
+import { MuiPickersUtilsProvider } from '@material-ui/pickers'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import DateFnsUtils from '@date-io/date-fns'
 import theme from '@/src/styles/theme'
 
 export default function MyApp(props) {
@@ -24,7 +26,9 @@ export default function MyApp(props) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <Component {...pageProps} />
+        </MuiPickersUtilsProvider>
       </ThemeProvider>
     </React.Fragment>
   )

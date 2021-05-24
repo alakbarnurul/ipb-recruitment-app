@@ -30,7 +30,7 @@ export default function Index() {
   return (
     <Container header={<NavigationTop />} footer={<NavigationBottom />}>
       {/* Header */}
-      <Box mt={10} textAlign='center'>
+      <Box mt={5} textAlign='center'>
         <DirectionsRun className={classes.keyIcon} />
         <Typography variant='subtitle1'>Login to apply & find your passion!</Typography>
       </Box>

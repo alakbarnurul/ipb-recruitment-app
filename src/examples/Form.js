@@ -6,7 +6,7 @@ import Button from '@/components/Button'
 import { LinearProgress, Grid, Typography, Box } from '@material-ui/core'
 import Link from 'next/link'
 
-const __Form = (props) => {
+const __Form = () => {
   const initialValues = {
     email: '',
     password: '',
@@ -36,19 +36,10 @@ const __Form = (props) => {
           </Box>
           <Grid container direction='column' spacing={2}>
             <Grid item>
-              <Field
-                label='Outlined'
-                variant='outlined'
-                fullWidth={true}
-                component={TextField}
-                name='email'
-                type='email'
-                label='Email'
-              />
+              <Field variant='outlined' fullWidth={true} component={TextField} name='email' type='email' label='Email' />
             </Grid>
             <Grid item>
               <Field
-                label='Outlined'
                 variant='outlined'
                 fullWidth={true}
                 component={TextField}
@@ -58,7 +49,14 @@ const __Form = (props) => {
               />
             </Grid>
             <Grid item>
-              <Button fullWidth={true} type='submit' variant='contained' color='primary' disabled={isSubmitting} onClick={submitForm}>
+              <Button
+                fullWidth={true}
+                type='submit'
+                variant='contained'
+                color='primary'
+                disabled={isSubmitting}
+                onClick={submitForm}
+              >
                 <Typography variant='subtitle1'>Login</Typography>
               </Button>
             </Grid>

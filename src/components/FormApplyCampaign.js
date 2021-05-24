@@ -42,6 +42,17 @@ const dummyDataField = [
       { title: 4, value: 4 },
     ],
   },
+  {
+    type: 'datepicker',
+    name: 'interviewDate',
+    label: 'Pilih jadwal interview',
+  },
+  {
+    type: 'file',
+    name: 'files',
+    label: 'Unggah berkas Anda',
+    filesLimit: 4,
+  },
 ]
 const FormApplyCampaign = () => {
   const initialValues = {
@@ -50,6 +61,8 @@ const FormApplyCampaign = () => {
     positions: [],
     description: '',
     comitment: '',
+    interviewDate: '',
+    files: [],
   }
   const validationSchema = Yup.object({
     name: Yup.string().required('*) Isi nama lengkap Anda'),
@@ -58,6 +71,8 @@ const FormApplyCampaign = () => {
       .required('*) Isi fakultas Anda'),
     positions: Yup.array().min(1, '*) Isi paling sedikit satu divisi'),
     description: Yup.string().required('*) Isi deskripsinya'),
+    interviewDate: Yup.string().required('*) Isi jadwal interview'),
+    files: Yup.array().min(1, '*) Isi paling sedikit satu berkas'),
   })
   const handleApply = (values, { setSubmitting }) => {
     setTimeout(() => {
