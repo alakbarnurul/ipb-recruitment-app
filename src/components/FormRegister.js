@@ -45,7 +45,7 @@ const FormRegister = (props) => {
         const { createdUserData, token } = response.data
         setAlertMessage({ status: 'success', message: 'Successfully registered' })
         localStorage.setItem('current-user', JSON.stringify(createdUserData))
-        localStorage.setItem('auth-token', JSON.stringify(token))
+        localStorage.setItem('auth-token', token)
         setTimeout(() => {
           router.push('/profile')
         }, 2000)

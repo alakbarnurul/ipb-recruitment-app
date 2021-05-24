@@ -6,25 +6,25 @@ import PropTypes from 'prop-types'
 
 const FieldRadio = (props) => {
   const { name, label, options, formikProps, ...rest } = props
-  const { isSubmitting } = formikProps
+  const { isSubmitting, setFieldValue } = formikProps
   // Notes : Radio button harus menggunakan initial value
-  const [value, setValue] = useState(options[0].value)
+  const [value, setValue] = useState(String(options[0].value))
   const handleSetValue = (e) => setValue(e.target.value)
   useEffect(() => {
     // Notes : Radio button harus menggunakan initial value
-    formikProps.setFieldValue(name, options[0].value)
+    setFieldValue(name, String(options[0].value))
   }, [])
   return (
     <Box {...rest}>
       <Box textAlign='left' mb={1}>
         <Typography variant='body1'>{label}</Typography>
       </Box>
-      <Field component={RadioGroup} name={name} value={value}>
+      <Field component={RadioGroup} name={name} value={value} onChange={handleSetValue}>
         {options.map((option) => (
           <FormControlLabel
             key={option.title}
             value={String(option.value)}
-            onClick={handleSetValue}
+            // onClick={handleSetValue}
             control={<Radio disabled={isSubmitting} />}
             label={option.title}
             disabled={isSubmitting}

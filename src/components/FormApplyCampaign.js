@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography, Button, Grid } from '@material-ui/core'
-import FieldCampaign from '@/components/FieldCampaign'
+import Field from '@/src/components/Field'
 import { Formik, Form } from 'formik'
 import * as Yup from 'yup'
 
@@ -72,7 +72,7 @@ const FormApplyCampaign = () => {
           <Grid container direction='column' spacing={3}>
             {dummyDataField.map((field) => (
               <Grid item key={field.name}>
-                <FieldCampaign {...field} formikProps={formikProps} />
+                <Field formikProps={formikProps} {...field} />
               </Grid>
             ))}
             <Grid item>

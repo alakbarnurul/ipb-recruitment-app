@@ -24,6 +24,7 @@ const useStyles = makeStyles(({ spacing }) => ({
   },
   chipPosition: {
     marginRight: spacing(1),
+    marginBottom: spacing(1),
   },
 }))
 export async function getStaticPaths() {
@@ -110,14 +111,7 @@ export default function Campaign({ campaign }) {
               Deskripsi
             </Typography>
             <Typography variant='body2' align='justify'>
-              {description} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vel dignissimos perspiciatis maiores
-              cumque, quibusdam incidunt possimus magni, aut ea, quo vitae voluptates iusto quisquam ipsam consectetur
-              sapiente earum alias pariatur eos. Itaque quaerat maxime, possimus dolore quisquam reprehenderit rem aspernatur
-              adipisci quis iure cumque enim aliquid eveniet rerum qui totam velit deleniti beatae? Porro quas sapiente
-              dignissimos odit aperiam debitis architecto quae, ipsa animi nobis, quisquam vitae. Quia nobis repellat in aut
-              asperiores quidem alias, voluptatibus totam nihil quaerat fuga doloremque. Eos, inventore. Consequatur hic,
-              nesciunt harum corrupti earum perferendis iure reiciendis, qui quas incidunt tenetur odio, voluptates cumque.
-              Officiis.
+              {description}
             </Typography>
           </Box>
         </Box>

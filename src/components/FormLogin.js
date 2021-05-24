@@ -37,7 +37,7 @@ const FormLogin = (props) => {
         const { user, token } = response.data
         setAlertMessage({ status: 'success', message: 'Login successfully!' })
         localStorage.setItem('current-user', JSON.stringify(user))
-        localStorage.setItem('auth-token', JSON.stringify(token))
+        localStorage.setItem('auth-token', token)
         setTimeout(() => {
           router.push('/profile')
         }, 2000)

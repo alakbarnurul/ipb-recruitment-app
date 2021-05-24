@@ -71,7 +71,7 @@ model Form {
   title       String?
   description String?
   fields      Json?
-  formUrl     String?
+  formUrl     String?   @unique
   createdAt   DateTime? @default(now())
   // Relations
   Campaign    Campaign? @relation(fields: [campaignId], references: [id])
@@ -90,7 +90,7 @@ model Organization {
   // Attributes
   id            String     @id @default(cuid())
   name          String?
-  email         String?
+  email         String?    @unique
   password      String?
   role          Role       @default(organization)
   period        String?

@@ -15,10 +15,12 @@ const useCurrentUser = () => {
     const restoredToken = localStorage.getItem('auth-token')
     const tokenVerification = async () => {
       await axios
-        // Notes : restoredToken with split remove "" from first and last char (BUG)
-        .post('/api/auth', { clientToken: restoredToken.split('"')[1] })
-        .then(() => {})
-        .catch(() => setIsError(true))
+        .post('/api/auth', { clientToken: restoredToken })
+        .then((response) => console.log(response))
+        .catch((error) => {
+          console.log(error.response)
+          setIsError(true)
+        })
     }
     if (!restoredUser || !restoredToken || isError || logout) {
       // Notes : Clear storage to avoid bugs/error
