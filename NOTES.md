@@ -1,29 +1,17 @@
 ### List of Setup
 
 1. Setup Next.js - Material UI
-2. Setup jsconfig.json
-3. Setup ESlint and Prettier
-4. Setup Husky
+2. Setup formatting jsconfig.json, ESlint, and Prettier
+3. Setup Husky
+4. Setup ProsgreSQL - Prisma
+5. Setup Next.js - Prisma
 
 ### Main Stacks
 
 1. Next.js
-2. Material UI
-3. Formik - Yup
-4. Zustand
-5. SWR - Axios
-
-### Prisma Queries
-
-1. Cara memunculkan data semua Campaigns miliknya.
-
-```jsx
-const data = await prisma.organization.findMany({
-    where: {
-      id: id,
-    },
-    include: {
-      campaigns: true,
-    },
-})`
-```
+2. PostgreSQL - Prisma
+3. JSON Web Token (Authorization)
+4. Material UI
+5. Formik - Yup
+6. Zustand
+7. SWR - Axios
