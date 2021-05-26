@@ -33,16 +33,17 @@ model Student {
 
 model History {
   // Attributes
-  id         String    @id @default(cuid())
+  id         String     @id @default(cuid())
   status     Json?
   formData   Json?
-  applyDate  DateTime? @default(now())
-  createdAt  DateTime? @default(now())
+  applyDate  DateTime?  @default(now())
+  createdAt  DateTime?  @default(now())
   // Relations
-  Student    Student?  @relation(fields: [studentId], references: [id])
+  Student    Student?   @relation(fields: [studentId], references: [id])
   studentId  String?
-  Campaign   Campaign? @relation(fields: [campaignId], references: [id])
+  Campaign   Campaign?  @relation(fields: [campaignId], references: [id])
   campaignId String?
+  Applicant  Applicant?
 }
 
 model Campaign {
@@ -86,6 +87,8 @@ model Applicant {
   applicantData     Json?
   CampaignManager   CampaignManager? @relation(fields: [campaignManagerId], references: [id])
   campaignManagerId String?
+  history           History?         @relation(fields: [historyId], references: [id])
+  historyId         String?
 }
 
 model CampaignManager {

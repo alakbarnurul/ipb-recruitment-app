@@ -6,10 +6,9 @@ import NavigationTop from '@/src/components/NavigationTop'
 import NavigationBottom from '@/src/components/NavigationBottom'
 import useCurrentUser from '@/hooks/useCurrentUser'
 import PageProgress from '@/src/components/PageProgress'
-import { PrismaClient } from '@prisma/client'
 import PropTypes from 'prop-types'
+import prisma from '@/utils/prisma'
 
-const prisma = new PrismaClient()
 export async function getServerSideProps() {
   const rawCampaigns = await prisma.campaign.findMany({
     include: {

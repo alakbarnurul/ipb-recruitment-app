@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Chip as MuiChip, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
@@ -10,41 +10,29 @@ const useStyles = makeStyles(() => ({
     letterSpacing: 1,
     fontWeight: 600,
   },
-  success: {
+  accepted: {
     color: '#FFFFFF',
     background: '#10B981',
   },
-  error: {
+  rejected: {
     color: '#FFFFFF',
     background: '#EF4444',
   },
-  warning: {
+  waiting: {
     color: '#FFFFFF',
     background: '#F59E0B',
+  },
+  onprogress: {
+    color: '#FFFFFF',
+    background: '#2563EB',
   },
 }))
 const Chip = props => {
   const classes = useStyles()
   const { model, label, className } = props
-  const [status, setStatus] = useState(model.toLowerCase())
-  useEffect(() => {
-    switch (status) {
-      case 'waiting':
-        setStatus('warning')
-        break
-      case 'accepted':
-        setStatus('success')
-        break
-      case 'rejected':
-        setStatus('error')
-        break
-      default:
-        setStatus('default')
-    }
-  }, [])
   return (
     <MuiChip
-      className={clsx(classes[status], className)}
+      className={clsx(classes[model?.toLowerCase() ?? 'default'], className)}
       label={<Typography className={classes.label}>{label}</Typography>}
     />
   )
@@ -52,6 +40,6 @@ const Chip = props => {
 Chip.propTypes = {
   model: PropTypes.string,
   label: PropTypes.string,
-  className: PropTypes.object,
+  className: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
 }
 export default Chip

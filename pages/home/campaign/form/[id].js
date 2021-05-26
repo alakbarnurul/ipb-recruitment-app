@@ -4,11 +4,10 @@ import Container from '@/src/components/Layout/Container'
 import NavigationTop from '@/src/components/NavigationTop'
 import NavigationBottom from '@/src/components/NavigationBottom'
 import FormApplyCampaign from '@/components/FormApplyCampaign'
-import { PrismaClient } from '@prisma/client'
 import * as Yup from 'yup'
 import PropTypes from 'prop-types'
+import prisma from '@/utils/prisma'
 
-const prisma = new PrismaClient()
 export async function getStaticPaths() {
   const rawCampaignForm = await prisma.form.findMany()
   const paths = rawCampaignForm.map(campaignForm => ({ params: { id: campaignForm.id } }))

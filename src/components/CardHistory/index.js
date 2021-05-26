@@ -4,6 +4,7 @@ import { Typography, Box, CardActions, Button, Card } from '@material-ui/core'
 import { Notifications } from '@material-ui/icons'
 import Chip from '@/components/Chip'
 import PropTypes from 'prop-types'
+import ChipProgress from '@/components/ChipProgress'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -40,7 +41,11 @@ const CardHistory = ({ historyData, ...props }) => {
           <Typography className={classes.historyTitle} variant='subtitle1'>
             {campaign?.name}
           </Typography>
-          <Chip model={status?.result} label={status?.result} />
+          {status.step > 0 && status.step < campaign?.timeline.length - 1 && status.result === 'Accepted' ? (
+            <Chip model='onProgress' label='On Progress' />
+          ) : (
+            <Chip model={status?.result} label={status?.result} />
+          )}
         </Box>
         <Box mt={1}>
           <Typography variant='body1'>
@@ -56,6 +61,21 @@ const CardHistory = ({ historyData, ...props }) => {
           {positions?.map(position => (
             <Chip className={classes.historyPosition} model='default' key={position} label={position} />
           ))}
+        </Box>
+        <Box mt={4}>
+          <Typography variant='subtitle2'>Hasil Tahapan Seleksi</Typography>
+          <Box display='flex' alignItems='center' mt={1}>
+            {campaign.timeline.map((step, index) => {
+              if (index === campaign.timeline.length - 1) return null
+              if (status?.history[index]?.result === 'Accepted') {
+                return <ChipProgress model='accepted' key={step.date} />
+              } else if (status?.history[index]?.result === 'Rejected') {
+                return <ChipProgress model='rejected' key={step.date} />
+              } else {
+                return <ChipProgress model='default' key={step.date} />
+              }
+            })}
+          </Box>
         </Box>
       </Box>
       <CardActions className={classes.historyActions}>

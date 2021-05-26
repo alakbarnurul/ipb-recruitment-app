@@ -37,35 +37,39 @@ export default async function applyCampaign(req, res) {
     if (isStudentApply !== undefined) {
       throw new Error('Maaf user sudah mendaftar')
     }
-    // Store formData to Campaign Manager (Create Applicant)
-    await prisma.applicant.create({
-      data: {
-        applicantData: formData,
-        CampaignManager: {
-          connect: {
-            id: campaignManager.id,
-          },
-        },
-      },
-    })
     // Store formData to Applicant History (Create History)
-    await prisma.history.create({
+    const history = await prisma.history.create({
       data: {
         status: {
+          step: 0,
           // Notes : Untuk state ada tiga, waiting, rejected, dan accepted (harus di-set sebagai enum)
           result: 'Waiting',
           // Notes : Untuk message nantinya sebuat pesan dari organisasi (non-fixed)
           message: 'Menunggu konfirmasi',
+          history: [],
         },
         formData: formData,
+        // Notes : Create History - Campaign
         Campaign: {
           connect: {
             id: campaign.id,
           },
         },
+        // Notes : Create History - Student
         Student: {
           connect: {
             id: applicant.user.id,
+          },
+        },
+        // Notes : Create History - Applicant
+        Applicant: {
+          create: {
+            applicantData: formData,
+            CampaignManager: {
+              connect: {
+                id: campaignManager.id,
+              },
+            },
           },
         },
       },
@@ -83,7 +87,8 @@ export default async function applyCampaign(req, res) {
     })
     return res.status(200).json({
       message: 'Success',
-      applicantData: formData,
+      // applicantData: formData,
+      history,
     })
   } catch (error) {
     return res.status(400).json({

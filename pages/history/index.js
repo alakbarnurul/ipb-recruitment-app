@@ -7,11 +7,10 @@ import useCurrentUser from '@/hooks/useCurrentUser'
 import PageWarning from '@/src/components/PageWarning'
 import PageProgress from '@/src/components/PageProgress'
 import CardHistory from '@/components/CardHistory'
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/utils/prisma'
 import PropTypes from 'prop-types'
 import axios from 'axios'
 
-const prisma = new PrismaClient()
 export async function getServerSideProps(ctx) {
   const authToken = ctx.req.cookies['auth-token']
   let currentUser = {}
@@ -56,6 +55,7 @@ export async function getServerSideProps(ctx) {
     status: data?.status,
     campaign: {
       name: data?.Campaign?.title,
+      timeline: data?.Campaign?.timeline,
     },
     organization: {
       name: data?.Campaign?.Organization?.name,
@@ -92,5 +92,5 @@ export default function History({ briefHistoryData }) {
   )
 }
 History.propTypes = {
-  briefHistoryData: PropTypes.object,
+  briefHistoryData: PropTypes.array,
 }

@@ -8,11 +8,10 @@ import useCurrentUser from '@/hooks/useCurrentUser'
 import NavigationTop from '@/src/components/NavigationTop'
 import NavigationBottom from '@/src/components/NavigationBottom'
 import Container from '@/src/components/Layout/Container'
-import { PrismaClient } from '@prisma/client'
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@material-ui/lab'
 import Link from 'next/link'
+import prisma from '@/utils/prisma'
 
-const prisma = new PrismaClient()
 const useStyles = makeStyles(({ spacing }) => ({
   root: {},
   organizationIcon: {
