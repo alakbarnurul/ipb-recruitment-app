@@ -8,7 +8,7 @@ import FieldRadio from '@/src/components/Field/FieldRadio'
 import FieldDatePicker from '@/src/components/Field/FieldDatePicker'
 import FieldUploadFile from '@/src/components/Field/FieldUploadFile'
 
-const FieldCampaign = (props) => {
+const FieldCampaign = props => {
   // Notes : Prop formikProps hanya dikirim bagi Filed yang membutuhkan
   const { type, options, filesLimit, formikProps, ...rest } = props
   switch (type) {

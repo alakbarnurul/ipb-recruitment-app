@@ -4,7 +4,7 @@ import { CheckboxWithLabel } from 'formik-material-ui'
 import PropTypes from 'prop-types'
 import { Box, FormControl, FormGroup, FormHelperText, Typography } from '@material-ui/core'
 
-const FieldCheckbox = (props) => {
+const FieldCheckbox = props => {
   const { name, label, options, formikProps, ...rest } = props
   const { touched, errors } = formikProps
   return (
@@ -14,7 +14,7 @@ const FieldCheckbox = (props) => {
           <Typography variant='body1'>{label}</Typography>
         </Box>
         <FormGroup>
-          {options.map((option) => (
+          {options.map(option => (
             <Field
               key={option.value}
               value={option.value}

@@ -25,7 +25,7 @@ const useStyles = makeStyles(({ spacing, palette }) => ({
     marginTop: spacing(1),
   },
 }))
-const FieldUploadFile = (props) => {
+const FieldUploadFile = props => {
   const { name, label, formikProps, filesLimit, ...rest } = props
   const { setFieldValue, errors } = formikProps
   const classes = useStyles()
@@ -35,7 +35,7 @@ const FieldUploadFile = (props) => {
         {label}
       </Typography>
       <DropzoneArea
-        onChange={(files) => setFieldValue(name, files)}
+        onChange={files => setFieldValue(name, files)}
         showPreviews={true}
         showPreviewsInDropzone={false}
         useChipsForPreview

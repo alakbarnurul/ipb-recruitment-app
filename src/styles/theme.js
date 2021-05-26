@@ -3,18 +3,7 @@ import { createMuiTheme } from '@material-ui/core/styles'
 // Notes : Create a theme instance.
 const theme = createMuiTheme({
   // Overrides
-  overrides: {
-    MuiChip: {
-      colorPrimary: {
-        color: '#fff',
-        backgroundColor: '#10B981',
-      },
-      colorSecondary: {
-        color: '#fff',
-        backgroundColor: '#EF4444',
-      },
-    },
-  },
+  overrides: {},
   // Breakpoints
   breakpoints: {
     keys: ['xs', 'sm', 'md', 'lg'],

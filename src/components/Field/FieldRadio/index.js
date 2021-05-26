@@ -4,12 +4,12 @@ import { Field } from 'formik'
 import { RadioGroup } from 'formik-material-ui'
 import PropTypes from 'prop-types'
 
-const FieldRadio = (props) => {
+const FieldRadio = props => {
   const { name, label, options, formikProps, ...rest } = props
   const { isSubmitting, setFieldValue } = formikProps
   // Notes : Radio button harus menggunakan initial value
   const [value, setValue] = useState(null)
-  const handleSetValue = (e) => setValue(String(e.target.value))
+  const handleSetValue = e => setValue(String(e.target.value))
   useEffect(() => {
     // Notes : Radio button harus menggunakan initial value
     setFieldValue(name, String(options[0].value))
@@ -20,7 +20,7 @@ const FieldRadio = (props) => {
         <Typography variant='body1'>{label}</Typography>
       </Box>
       <Field component={RadioGroup} name={name} value={value}>
-        {options.map((option) => (
+        {options.map(option => (
           <FormControlLabel
             key={option.title}
             value={String(option.value)}

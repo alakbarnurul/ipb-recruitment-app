@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Typography } from '@material-ui/core'
 
-const DebugText = (props) => {
+const DebugText = props => {
   return (
     <Box {...props}>
       <Typography variant='subtitle1'>

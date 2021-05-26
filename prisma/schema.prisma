@@ -33,20 +33,21 @@ model Student {
 
 model History {
   // Attributes
-  id           String    @id @default(cuid())
-  status       Json?
-  registerDate DateTime?
-  createdAt    DateTime? @default(now())
+  id         String    @id @default(cuid())
+  status     Json?
+  formData   Json?
+  applyDate  DateTime? @default(now())
+  createdAt  DateTime? @default(now())
   // Relations
-  Student      Student?  @relation(fields: [studentId], references: [id])
-  studentId    String?
-  Campaign     Campaign? @relation(fields: [campaignId], references: [id])
-  campaignId   String?
+  Student    Student?  @relation(fields: [studentId], references: [id])
+  studentId  String?
+  Campaign   Campaign? @relation(fields: [campaignId], references: [id])
+  campaignId String?
 }
 
 model Campaign {
   // Attributes
-  id                 String        @id @default(cuid())
+  id                 String           @id @default(cuid())
   title              String?
   status             Boolean?
   imageUrl           String?
@@ -55,12 +56,12 @@ model Campaign {
   timeline           Json?
   generalRequirement String?
   dateClosed         DateTime?
-  createdAt          DateTime?     @default(now())
+  createdAt          DateTime?        @default(now())
   // Relations
   applicantHistory   History[]
-  registerForm       Form?
-  applicantManager   Applicant?
-  Organization       Organization? @relation(fields: [organizationId], references: [id])
+  campaignForm       Form?
+  campaignManager    CampaignManager?
+  Organization       Organization?    @relation(fields: [organizationId], references: [id])
   organizationId     String?
   students           Student[]
 }
@@ -70,6 +71,8 @@ model Form {
   id          String    @id @default(cuid())
   title       String?
   description String?
+  // Fix/Bugs : Pada fields ada tiga property utama yaitu name, type, dan label, options itu opsional
+  // Sehingga properti-properti tersebut harus di-check, error jika di-assign selain itu
   fields      Json?
   formUrl     String?   @unique
   createdAt   DateTime? @default(now())
@@ -79,30 +82,43 @@ model Form {
 }
 
 model Applicant {
+  id                String           @id @default(cuid())
+  applicantData     Json?
+  CampaignManager   CampaignManager? @relation(fields: [campaignManagerId], references: [id])
+  campaignManagerId String?
+}
+
+model CampaignManager {
   // Attributes
-  id         String    @id @default(cuid())
+  id             String        @id @default(cuid())
+  campaignName   String?
+  createdData    DateTime      @default(now())
   // Relations
-  Campaign   Campaign? @relation(fields: [campaignId], references: [id])
-  campaignId String?
+  Campaign       Campaign?     @relation(fields: [campaignId], references: [id])
+  campaignId     String?
+  Organization   Organization? @relation(fields: [organizationId], references: [id])
+  organizationId String?
+  applicantsData Applicant[]
 }
 
 model Organization {
   // Attributes
-  id            String     @id @default(cuid())
-  name          String?
-  email         String?    @unique
-  password      String?
-  role          Role       @default(organization)
-  period        String?
-  startPeriod   DateTime?
-  endPeriod     DateTime?
-  cabinet       String?
-  faculty       String?
-  department    String?
-  bio           String?
-  contactPerson String?
+  id              String            @id @default(cuid())
+  name            String?
+  email           String?           @unique
+  password        String?
+  role            Role              @default(organization)
+  period          String?
+  startPeriod     DateTime?
+  endPeriod       DateTime?
+  cabinet         String?
+  faculty         String?
+  department      String?
+  bio             String?
+  contactPerson   String?
   // Relations
-  campaigns     Campaign[]
+  campaigns       Campaign[]
+  campaignManager CampaignManager[]
 }
 
 enum Role {

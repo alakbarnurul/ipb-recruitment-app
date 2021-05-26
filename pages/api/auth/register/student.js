@@ -25,15 +25,15 @@ export default async function studentRegisterHandler(req, res) {
     const createdUserData = await prisma.student.create({
       data: { fullName, email, nim, password: encryptedPassword },
     })
-    const token = createToken(createdUserData.id)
-    cookies.set('auth-token', token, {
+    const authToken = createToken(createdUserData.id)
+    cookies.set('auth-token', authToken, {
       expires: days,
       httpOnly: true,
       secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
     })
     return res.status(200).json({
       status: 'Successfully registered!',
-      token,
+      authToken,
       createdUserData,
     })
   } catch (error) {

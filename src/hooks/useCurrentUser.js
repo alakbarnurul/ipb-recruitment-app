@@ -7,7 +7,7 @@ const useCurrentUser = () => {
   // State kedua ada dua nilai undefined/data asli
   // Jika undefined tampilkan page public, jika data aktual maka tampilkan page private
   const [currentUser, setCurrentUser] = useState(null)
-  const [currentToken, setCurrentToken] = useState(null)
+  const [currentAuthToken, setCurrentAuthToken] = useState(null)
   const [isError, setIsError] = useState(false)
   const [logout, setLogout] = useState(false)
   useEffect(() => {
@@ -16,8 +16,8 @@ const useCurrentUser = () => {
     const tokenVerification = async () => {
       await axios
         .post('/api/auth', { clientToken: restoredToken })
-        .then((response) => console.log(response))
-        .catch((error) => {
+        .then(response => console.log(response))
+        .catch(error => {
           console.log(error.response)
           setIsError(true)
         })
@@ -30,7 +30,7 @@ const useCurrentUser = () => {
       // Notes : setTimeout digunakan untuk UX, sehingga keitka loading (state = null) maka ada tampilannya
       const setToUndefined = setTimeout(() => {
         setCurrentUser(undefined)
-        setCurrentToken(undefined)
+        setCurrentAuthToken(undefined)
       }, 850)
       return () => {
         clearTimeout(setToUndefined)
@@ -39,7 +39,7 @@ const useCurrentUser = () => {
     // Notes : setTimeout digunakan untuk UX, sehingga ketika loading (state = null) maka menampilkan loading
     const setUserData = setTimeout(() => {
       setCurrentUser(restoredUser)
-      setCurrentToken(restoredToken)
+      setCurrentAuthToken(restoredToken)
     }, 850)
     tokenVerification()
     return () => {
@@ -47,7 +47,7 @@ const useCurrentUser = () => {
     }
   }, [isError, logout])
 
-  return { currentUser, currentToken, isError, setLogout }
+  return { currentUser, currentAuthToken, isError, setLogout }
 }
 
 export default useCurrentUser

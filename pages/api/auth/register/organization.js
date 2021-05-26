@@ -32,15 +32,15 @@ export default async function organizationRegisterHandler(req, res) {
         cabinet,
       },
     })
-    const token = createToken(createdOrganization.id)
-    cookies.set('auth-token', token, {
+    const authToken = createToken(createdOrganization.id)
+    cookies.set('auth-token', authToken, {
       expires: days,
       httpOnly: true,
       secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
     })
     return res.status(200).json({
       status: 'Successfully registered!',
-      token,
+      authToken,
       createdOrganization,
     })
   } catch (error) {

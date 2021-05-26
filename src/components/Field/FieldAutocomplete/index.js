@@ -4,7 +4,7 @@ import { Autocomplete } from 'formik-material-ui-lab'
 import { TextField } from '@material-ui/core'
 import PropTypes from 'prop-types'
 
-const FieldAutocomplete = (props) => {
+const FieldAutocomplete = props => {
   const { name, label, options, formikProps, ...rest } = props
   const { touched, errors } = formikProps
   return (
@@ -13,9 +13,9 @@ const FieldAutocomplete = (props) => {
       disableClearable
       component={Autocomplete}
       options={options}
-      getOptionLabel={(option) => option?.title ?? ''}
-      getOptionSelected={(option) => option.title}
-      renderInput={(params) => (
+      getOptionLabel={option => option?.title ?? ''}
+      getOptionSelected={option => option.title}
+      renderInput={params => (
         <TextField
           {...params}
           name={name}

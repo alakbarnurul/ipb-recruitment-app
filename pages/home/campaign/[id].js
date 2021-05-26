@@ -10,7 +10,6 @@ import NavigationBottom from '@/src/components/NavigationBottom'
 import Container from '@/src/components/Layout/Container'
 import { PrismaClient } from '@prisma/client'
 import { Timeline, TimelineItem, TimelineSeparator, TimelineConnector, TimelineContent, TimelineDot } from '@material-ui/lab'
-import { useRouter } from 'next/router'
 import Link from 'next/link'
 
 const prisma = new PrismaClient()
@@ -29,7 +28,7 @@ const useStyles = makeStyles(({ spacing }) => ({
 }))
 export async function getStaticPaths() {
   const rawCampaign = await prisma.campaign.findMany()
-  const paths = rawCampaign.map((campaign) => ({ params: { id: campaign.id } }))
+  const paths = rawCampaign.map(campaign => ({ params: { id: campaign.id } }))
   return { paths, fallback: false }
 }
 export async function getStaticProps({ params }) {
@@ -39,9 +38,14 @@ export async function getStaticProps({ params }) {
     },
     include: {
       Organization: true,
+      campaignForm: {
+        select: {
+          id: true,
+        },
+      },
     },
   })
-  const campaign = rawCampaign.map((campaign) => ({
+  const campaign = rawCampaign.map(campaign => ({
     ...campaign,
     dateClosed: campaign?.dateClosed?.toISOString().split('T')[0],
     createdAt: campaign?.createdAt?.toISOString().split('T')[0],
@@ -64,10 +68,9 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Campaign({ campaign }) {
-  const { Organization, imageUrl, title, timeline, description, generalRequirement, positions } = campaign[0]
+  const { Organization, imageUrl, title, timeline, description, generalRequirement, positions, campaignForm } = campaign[0]
   const { currentUser } = useCurrentUser()
   const classes = useStyles()
-  const router = useRouter()
   if (currentUser === null) {
     return <PageProgress />
   }
@@ -128,7 +131,7 @@ export default function Campaign({ campaign }) {
             <Typography className={classes.subTitle} variant='subtitle2'>
               Divisi
             </Typography>
-            {positions?.map((position) => (
+            {positions?.map(position => (
               <Chip
                 className={classes.chipPosition}
                 key={position}
@@ -139,7 +142,7 @@ export default function Campaign({ campaign }) {
           </Box>
         </Box>
         <Box mt={5}>
-          <Link href={`/home/campaign/form/${router?.query?.id}`} passHref>
+          <Link href={`/home/campaign/form/${campaignForm?.id}`} passHref>
             <Button variant='contained' color='primary' fullWidth>
               <Typography variant='subtitle2'>Apply</Typography>
             </Button>

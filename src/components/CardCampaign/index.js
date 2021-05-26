@@ -1,10 +1,11 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import { Box, Chip, Card, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core'
+import { Box, Card, CardActions, CardContent, CardMedia, Typography } from '@material-ui/core'
 import Button from '@/src/components/Button'
 import EventIcon from '@material-ui/icons/Event'
 import PropTypes from 'prop-types'
 import Link from 'next/link'
+import Chip from '@/components/Chip'
 
 const useStyles = makeStyles(({ spacing }) => ({
   campaignRoot: {
@@ -58,25 +59,7 @@ const CardCampaign = ({ campaignContent, ...props }) => {
           <Typography className={classes.campaignTitle} variant='h5' component='h2'>
             {title}
           </Typography>
-          {status ? (
-            <Chip
-              color='primary'
-              label={
-                <Typography className={classes.campaignChip} variant='subtitle1'>
-                  Open
-                </Typography>
-              }
-            />
-          ) : (
-            <Chip
-              color='secondary'
-              label={
-                <Typography className={classes.campaignChip} variant='subtitle1'>
-                  Closed
-                </Typography>
-              }
-            />
-          )}
+          {status ? <Chip model='accepted' label='Open' /> : <Chip model='rejected' label='Closed' />}
         </Box>
         <Typography className={classes.campaignOrganization} gutterBottom variant='subtitle1' component='h2'>
           {Organization?.name}

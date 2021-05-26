@@ -15,7 +15,7 @@ const useStyles = makeStyles(({ spacing }) => ({
     marginRight: spacing(1.5),
   },
 }))
-const FormLogin = (props) => {
+const FormLogin = props => {
   const [alertMessage, setAlertMessage] = useState({ status: '', message: '' })
   const [showAlert, setShowAlert] = useState(false)
   const router = useRouter()
@@ -33,17 +33,17 @@ const FormLogin = (props) => {
     const role = 'student'
     await axios
       .post(`/api/auth/login/${role}`, { email, password })
-      .then((response) => {
-        const { user, token } = response.data
+      .then(response => {
+        const { user, authToken } = response.data
         setAlertMessage({ status: 'success', message: 'Login successfully!' })
         localStorage.setItem('current-user', JSON.stringify(user))
-        localStorage.setItem('auth-token', token)
+        localStorage.setItem('auth-token', authToken)
         setTimeout(() => {
           router.push('/profile')
         }, 2000)
         console.log(response)
       })
-      .catch((error) => {
+      .catch(error => {
         setAlertMessage({ status: 'error', message: 'User not found!' })
         console.log(error.response)
       })

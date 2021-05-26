@@ -15,7 +15,7 @@ const useStyles = makeStyles(({ spacing }) => ({
     marginRight: spacing(1.5),
   },
 }))
-const FormRegister = (props) => {
+const FormRegister = props => {
   const [alertMessage, setAlertMessage] = useState({ status: '', message: '' })
   const [showAlert, setShowAlert] = useState(false)
   const router = useRouter()
@@ -41,17 +41,17 @@ const FormRegister = (props) => {
     const role = 'student'
     await axios
       .post(`/api/auth/register/${role}`, { fullName, email, nim, password })
-      .then((response) => {
-        const { createdUserData, token } = response.data
+      .then(response => {
+        const { createdUserData, authToken } = response.data
         setAlertMessage({ status: 'success', message: 'Successfully registered' })
         localStorage.setItem('current-user', JSON.stringify(createdUserData))
-        localStorage.setItem('auth-token', token)
+        localStorage.setItem('auth-token', authToken)
         setTimeout(() => {
           router.push('/profile')
         }, 2000)
         console.log(response)
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error.response)
         setAlertMessage({ status: 'error', message: 'Failed to create account' })
       })

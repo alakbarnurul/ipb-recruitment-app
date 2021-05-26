@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "History" ALTER COLUMN "applyDate" SET DEFAULT CURRENT_TIMESTAMP;

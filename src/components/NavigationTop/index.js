@@ -22,7 +22,7 @@ const useStyles = makeStyles(({ spacing, breakpoints }) => ({
   },
 }))
 
-const NavigationTop = (props) => {
+const NavigationTop = props => {
   const classes = useStyles()
   const { isUp, isDown } = useBreakpoints()
   return (

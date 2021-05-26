@@ -23,7 +23,7 @@ const useStyles = makeStyles(({ breakpoints }) => ({
   },
 }))
 
-const NavigationBottom = (props) => {
+const NavigationBottom = props => {
   const classes = useStyles()
   const router = useRouter()
   const pathName = router.asPath.split('/')[1]
