@@ -8,6 +8,8 @@ import useCurrentUser from '@/hooks/useCurrentUser'
 import PageProgress from '@/src/components/PageProgress'
 import PropTypes from 'prop-types'
 import prisma from '@/utils/prisma'
+import { School } from '@material-ui/icons'
+import PageEmpty from '@/src/components/PageEmpty'
 
 export async function getServerSideProps() {
   const rawCampaigns = await prisma.campaign.findMany({
@@ -36,10 +38,14 @@ export async function getServerSideProps() {
     },
   }
 }
+
 export default function Home({ campaigns }) {
   const { currentUser } = useCurrentUser()
   if (currentUser === null) {
     return <PageProgress />
+  }
+  if (campaigns.length === 0) {
+    return <PageEmpty icon={<School />} message='Open Recruitment tidak tersedia, mohon untuk kembali lagi nanti.' />
   }
   return (
     <Box>

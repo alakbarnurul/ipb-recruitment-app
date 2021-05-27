@@ -9,6 +9,8 @@ import PageProgress from '@/src/components/PageProgress'
 import CardHistory from '@/components/CardHistory'
 import prisma from '@/utils/prisma'
 import PropTypes from 'prop-types'
+import PageEmpty from '@/src/components/PageEmpty'
+import { Assessment } from '@material-ui/icons'
 import axios from 'axios'
 
 export async function getServerSideProps(ctx) {
@@ -80,6 +82,14 @@ export default function History({ briefHistoryData }) {
   }
   if (currentUser === undefined) {
     return <PageWarning />
+  }
+  if (briefHistoryData.length === 0) {
+    return (
+      <PageEmpty
+        icon={<Assessment />}
+        message='History lamaran Open Recruitment belum ada, mohon untuk apply terlebih dahulu.'
+      />
+    )
   }
   return (
     <Container header={<NavigationTop />} footer={<NavigationBottom />}>

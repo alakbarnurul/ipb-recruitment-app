@@ -55,10 +55,10 @@ export default function FormCampaign({ campaignForm }) {
   }
   return (
     <Container header={<NavigationTop />} footer={<NavigationBottom />}>
-      <Box textAlign='center'>
-        <Typography variant='subtitle1'>Silakan isi form di bawah</Typography>
+      <Box textAlign='center' mt={2}>
+        <Typography variant='subtitle1'>Silakan isi form di bawah untuk Apply</Typography>
       </Box>
-      <Box py={6} textAlign='center'>
+      <Box py={3} textAlign='center'>
         <FormApplyCampaign campaignFields={fields} initValues={initValues} initSchema={initSchema} />
       </Box>
     </Container>
