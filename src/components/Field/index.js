@@ -8,36 +8,49 @@ import FieldRadio from '@/src/components/Field/FieldRadio'
 import FieldDatePicker from '@/src/components/Field/FieldDatePicker'
 import FieldUploadFile from '@/src/components/Field/FieldUploadFile'
 
-const FieldCampaign = props => {
+const Field = props => {
   // Notes : Prop formikProps hanya dikirim bagi Filed yang membutuhkan
-  const { type, options, filesLimit, formikProps, ...rest } = props
+  const { type, options, filesLimit, variant, fullWidth, formikProps, ...rest } = props
   switch (type) {
     case 'textfield':
-      return <FieldText variant='outlined' fullWidth={true} {...rest} />
+      return <FieldText variant={variant} fullWidth={fullWidth} {...rest} />
     case 'textarea':
-      return <FieldTextArea variant='outlined' fullWidth={true} multiline rows={3} options={options} {...rest} />
+      return <FieldTextArea variant={variant} fullWidth={fullWidth} multiline rows={3} options={options} {...rest} />
     case 'autocomplete':
-      return <FieldAutocomplete variant='outlined' options={options} formikProps={formikProps} {...rest} />
+      return <FieldAutocomplete variant={variant} options={options} formikProps={formikProps} {...rest} />
     case 'checkbox':
       return <FieldCheckbox formikProps={formikProps} options={options} {...rest} />
     case 'radio':
       return <FieldRadio formikProps={formikProps} options={options} {...rest} />
     case 'datepicker':
-      return <FieldDatePicker variant='outlined' formikProps={formikProps} fullWidth={true} {...rest} />
+      return <FieldDatePicker variant={variant} fullWidth={fullWidth} formikProps={formikProps} {...rest} />
     case 'file':
       return (
-        <FieldUploadFile variant='outlined' formikProps={formikProps} filesLimit={filesLimit} fullWidth={true} {...rest} />
+        <FieldUploadFile
+          variant={variant}
+          formikProps={formikProps}
+          filesLimit={filesLimit}
+          fullWidth={fullWidth}
+          {...rest}
+        />
       )
     default:
       return null
   }
 }
 
-FieldCampaign.propTypes = {
+Field.propTypes = {
   type: PropTypes.string,
   options: PropTypes.array,
   formikProps: PropTypes.object,
   filesLimit: PropTypes.number,
+  variant: PropTypes.string,
+  fullWidth: PropTypes.bool,
 }
 
-export default FieldCampaign
+Field.defaultProps = {
+  variant: 'outlined',
+  fullWidth: true,
+}
+
+export default Field

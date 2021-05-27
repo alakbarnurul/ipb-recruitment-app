@@ -3,7 +3,13 @@ import { createMuiTheme } from '@material-ui/core/styles'
 // Notes : Create a theme instance.
 const theme = createMuiTheme({
   // Overrides
-  overrides: {},
+  overrides: {
+    MuiButton: {
+      root: {
+        textTransform: 'none',
+      },
+    },
+  },
   // Breakpoints
   breakpoints: {
     keys: ['xs', 'sm', 'md', 'lg'],

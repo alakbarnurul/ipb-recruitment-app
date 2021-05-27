@@ -15,7 +15,7 @@ model Student {
   id            String     @id @default(cuid())
   fullName      String
   imageUrl      String?
-  gender        Boolean?
+  gender        String?
   nim           String     @unique
   yearOfCollege DateTime?
   email         String     @unique
@@ -57,6 +57,7 @@ model Campaign {
   timeline           Json?
   generalRequirement String?
   dateClosed         DateTime?
+  label              String?
   createdAt          DateTime?        @default(now())
   // Relations
   applicantHistory   History[]

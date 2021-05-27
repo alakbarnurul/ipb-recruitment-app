@@ -45,7 +45,7 @@ export default function FormCampaign({ campaignForm }) {
     // Notes : Assign for dynamic validationSchema
     if (type === 'autocomplete') {
       initSchema[name] = Yup.string()
-        .transform((value, originalValue) => originalValue.title)
+        .transform((_, originalValue) => originalValue.title)
         .required('* Wajib diisi')
     } else if (['checkbox', 'file'].includes(type)) {
       initSchema[name] = Yup.array().min(1, '* Wajib diisi')
