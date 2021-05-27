@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import verificationToken from '@/api/utils/verificationToken'
+import verificationToken from '@/api/_src/utils/verificationToken'
 
 const prisma = new PrismaClient()
 export default async function userDataHandler(req, res) {

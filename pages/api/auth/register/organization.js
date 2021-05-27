@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import Cookies from 'cookies'
 import bcrypt from 'bcrypt'
-import createToken from '@/api/utils/createToken'
+import createToken from '@/api/_src/utils/createToken'
 
 const prisma = new PrismaClient()
 export default async function organizationRegisterHandler(req, res) {

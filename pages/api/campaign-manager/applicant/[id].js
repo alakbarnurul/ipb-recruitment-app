@@ -1,5 +1,5 @@
-import prisma from '@/api/utils/prisma'
-import verificationToken from '@/api/utils/verificationToken'
+import prisma from '@/api/_src/utils/prisma'
+import verificationToken from '@/api/_src/utils/verificationToken'
 
 export default async function updateApplicantStatus(req, res) {
   if (req.method !== 'POST') {

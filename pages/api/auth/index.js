@@ -1,4 +1,4 @@
-import verificationToken from '@/api/utils/verificationToken'
+import verificationToken from '@/api/_src/utils/verificationToken'
 
 export default async function authorizationHandler(req, res) {
   const { clientToken } = req.body
