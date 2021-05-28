@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography, Box, CardActions, Button, Card } from '@material-ui/core'
 import { Notifications } from '@material-ui/icons'
 import Chip from '@/components/Chip'
 import PropTypes from 'prop-types'
 import ChipProgress from '@/components/ChipProgress'
+import DialogDetailHistory from '@/src/components/DialogDetailHistory'
 
 const useStyles = makeStyles(({ spacing }) => ({
   root: {
@@ -34,6 +35,8 @@ const useStyles = makeStyles(({ spacing }) => ({
 const CardHistory = ({ historyData, ...props }) => {
   const classes = useStyles()
   const { positions, applyDate, status, campaign, organization } = historyData
+  const [isShowDialog, setIsShowDialog] = useState(false)
+  const handleIsShowDialog = () => setIsShowDialog(true)
   return (
     <Card className={classes.root} {...props}>
       <Box>
@@ -48,14 +51,15 @@ const CardHistory = ({ historyData, ...props }) => {
           )}
         </Box>
         <Box mt={1}>
-          <Typography variant='body1'>
-            {organization?.name} - Kabinet {organization?.cabinet}
-          </Typography>
-          <Typography variant='body2'>{applyDate}</Typography>
+          <Typography variant='subtitle1'>{organization?.name}</Typography>
+          <Typography variant='body2'>Tanggal Pendaftaran : {applyDate}</Typography>
         </Box>
         <Box mt={2} display='flex' alignItems='center'>
           <Notifications className={classes.historyMessageIcon} />
-          <Typography variant='body1'>{status.message}</Typography>
+          <Box>
+            <Typography variant='subtitle2'>Pesan dari Organizer</Typography>
+            <Typography variant='body1'>{status.message}</Typography>
+          </Box>
         </Box>
         <Box mt={2} display='flex' alignItems='center' flexWrap='wrap'>
           {positions?.map(position => (
@@ -79,12 +83,11 @@ const CardHistory = ({ historyData, ...props }) => {
         </Box>
       </Box>
       <CardActions className={classes.historyActions}>
-        <Button className={classes.historyButtonActions}>
-          {/* <Link href={`/home/campaign/${id}`} passHref> */}
+        <Button type='button' onClick={handleIsShowDialog} className={classes.historyButtonActions}>
           <Typography variant='subtitle2'>Detail</Typography>
-          {/* </Link> */}
         </Button>
       </CardActions>
+      {isShowDialog && <DialogDetailHistory isOpen={isShowDialog} setIsOpen={setIsShowDialog} content={historyData} />}
     </Card>
   )
 }

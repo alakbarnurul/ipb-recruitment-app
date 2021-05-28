@@ -56,6 +56,7 @@ export async function getServerSideProps(ctx) {
     applyDate: data?.applyDate,
     status: data?.status,
     campaign: {
+      id: data?.Campaign?.id,
       name: data?.Campaign?.title,
       timeline: data?.Campaign?.timeline,
     },

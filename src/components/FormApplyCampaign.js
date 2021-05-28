@@ -24,7 +24,7 @@ const FormApplyCampaign = ({ campaignFields, initValues, initSchema }) => {
     await axios
       .post(`/api/campaign/apply/${router.query.id}`, { formData: { ...values }, authToken: currentAuthToken })
       .then(response => {
-        setAlertMessage({ status: 'success', message: 'Apply successfully! Check your application history.' })
+        setAlertMessage({ status: 'success', message: 'Apply successfully! Check your history.' })
         console.log(response)
       })
       .catch(error => {

@@ -9,6 +9,11 @@ const theme = createMuiTheme({
         textTransform: 'none',
       },
     },
+    MuiDialog: {
+      paperWidthMd: {
+        maxWidth: 380,
+      },
+    },
   },
   // Breakpoints
   breakpoints: {

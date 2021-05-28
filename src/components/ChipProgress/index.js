@@ -23,7 +23,6 @@ const useStyles = makeStyles(({ spacing }) => ({
 }))
 const ChipProgress = ({ model, ...props }) => {
   const classes = useStyles()
-  console.log(model)
   return <Box className={clsx(classes.root, classes[model ?? 'default'])} {...props}></Box>
 }
 ChipProgress.propTypes = {
