@@ -15,6 +15,12 @@ import axios from 'axios'
 
 export async function getServerSideProps(ctx) {
   const authToken = ctx.req.cookies['auth-token']
+  // Notes : Condition when user logout or cookies not found!
+  if (!authToken) {
+    return {
+      props: { briefHistoryData: null },
+    }
+  }
   let currentUser = {}
   await axios
     .post(`${process.env.BASE_URL}/api/user/student`, { authToken })

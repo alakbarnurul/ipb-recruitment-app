@@ -33,6 +33,12 @@ const useStyles = makeStyles(({ spacing }) => ({
 }))
 export async function getServerSideProps(ctx) {
   const authToken = ctx.req.cookies['auth-token']
+  // Notes : Condition when user logout or cookies not found!
+  if (!authToken) {
+    return {
+      props: { userData: null, authToken: null },
+    }
+  }
   let userData = {}
   await axios
     .post(`${process.env.BASE_URL}/api/user/student`, { authToken })
