@@ -10,10 +10,10 @@ import FieldUploadFile from '@/src/components/Field/FieldUploadFile'
 
 const Field = props => {
   // Notes : Prop formikProps hanya dikirim bagi Filed yang membutuhkan
-  const { type, options, filesLimit, variant, fullWidth, formikProps, ...rest } = props
-  switch (type) {
+  const { model, options, filesLimit, variant, fullWidth, formikProps, type, ...rest } = props
+  switch (model) {
     case 'textfield':
-      return <FieldText variant={variant} fullWidth={fullWidth} {...rest} />
+      return <FieldText variant={variant} fullWidth={fullWidth} type={type} {...rest} />
     case 'textarea':
       return <FieldTextArea variant={variant} fullWidth={fullWidth} multiline rows={3} options={options} {...rest} />
     case 'autocomplete':
@@ -41,6 +41,7 @@ const Field = props => {
 
 Field.propTypes = {
   type: PropTypes.string,
+  model: PropTypes.string,
   options: PropTypes.array,
   formikProps: PropTypes.object,
   filesLimit: PropTypes.number,

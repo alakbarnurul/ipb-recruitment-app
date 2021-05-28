@@ -1,14 +1,13 @@
-import { PrismaClient } from '@prisma/client'
 import verificationToken from '@/api/_src/utils/verificationToken'
+import prisma from '@/api/_src/libs/prisma'
 
-const prisma = new PrismaClient()
 export default async function createCampaigHandler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' })
   }
-  const { authToken, title, imageUrl, positions, description, timeline, generalRequirement, dateClosed, campaignForm } =
-    req.body
+  const { title, imageUrl, positions, description, timeline, generalRequirement, dateClosed, campaignForm } = req.body
   const { title: formTitle, description: formDescription, fields: formFields } = campaignForm
+  const authToken = req.headers['authorization']
   // Auth Token
   const { data: organization, status } = verificationToken(authToken)
   if (!status) {

@@ -6,8 +6,9 @@ export default async function applyCampaign(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' })
   }
-  const { authToken, formData } = req.body
+  const { formData } = req.body
   const { formId } = req.query
+  const authToken = req.headers['authorization']
   // Auth Token
   const { data: applicant, status } = verificationToken(authToken)
   if (!status) {

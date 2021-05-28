@@ -55,6 +55,7 @@ export async function getServerSideProps(ctx) {
     positions: data?.formData?.positions ?? '',
     applyDate: data?.applyDate,
     status: data?.status,
+    formData: data?.formData,
     campaign: {
       id: data?.Campaign?.id,
       name: data?.Campaign?.title,

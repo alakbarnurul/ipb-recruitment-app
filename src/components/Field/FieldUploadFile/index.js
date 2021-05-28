@@ -13,6 +13,7 @@ const useStyles = makeStyles(({ spacing, palette }) => ({
   },
   previewChip: {
     marginTop: spacing(2),
+    maxWidth: 280,
   },
   text: {
     fontSize: 16,
@@ -72,5 +73,8 @@ FieldUploadFile.propTypes = {
   label: PropTypes.string,
   formikProps: PropTypes.object,
   filesLimit: PropTypes.number,
+}
+FieldUploadFile.defaultProps = {
+  filesLimit: 1,
 }
 export default FieldUploadFile

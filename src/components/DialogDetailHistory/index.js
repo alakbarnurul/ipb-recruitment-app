@@ -17,6 +17,9 @@ const useStyles = makeStyles(({ spacing }) => ({
   dialogTitle: {
     paddingLeft: spacing(1),
   },
+  historyStatus: {
+    marginRight: spacing(2),
+  },
 }))
 const DialogDetailHistory = ({ isOpen, setIsOpen, content }) => {
   const classes = useStyles()
@@ -61,10 +64,15 @@ const DialogDetailHistory = ({ isOpen, setIsOpen, content }) => {
               ))}
             </Timeline>
           </Box>
-          <Box my={3}>
-            <Typography variant='subtitle2'>
-              Hasil Akhir : <Chip model={status?.result} label={status?.result} />
+          <Box my={3} display='flex' alignItems='center'>
+            <Typography className={classes.historyStatus} variant='subtitle2'>
+              Hasil Akhir :
             </Typography>
+            {status.step > 0 && status.step < campaign?.timeline.length - 1 && status.result === 'Accepted' ? (
+              <Chip model='onProgress' label='On Progress' />
+            ) : (
+              <Chip model={status?.result} label={status?.result} />
+            )}
           </Box>
         </DialogContent>
       </Dialog>

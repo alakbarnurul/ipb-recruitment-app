@@ -39,15 +39,15 @@ export default function FormCampaign({ campaignForm }) {
   const { fields } = campaignForm
   const initSchema = {}
   const initValues = {}
-  for (const { type, name } of fields) {
+  for (const { model, name } of fields) {
     // Notes : Assign for dynamic initialValues
-    initValues[name] = type === ('checkbox' || 'file') ? [] : ''
+    initValues[name] = model === ('checkbox' || 'file') ? [] : ''
     // Notes : Assign for dynamic validationSchema
-    if (type === 'autocomplete') {
+    if (model === 'autocomplete') {
       initSchema[name] = Yup.string()
-        .transform((_, originalValue) => originalValue.title)
+        .transform((_, value) => value.title)
         .required('* Wajib diisi')
-    } else if (['checkbox', 'file'].includes(type)) {
+    } else if (['checkbox', 'file'].includes(model)) {
       initSchema[name] = Yup.array().min(1, '* Wajib diisi')
     } else {
       initSchema[name] = Yup.string().required('* Wajib diisi')

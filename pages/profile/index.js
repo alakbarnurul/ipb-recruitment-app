@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Button, Card, CardMedia, CardActionArea } from '@material-ui/core'
 import Container from '@/src/components/Layout/Container'
 import NavigationTop from '@/src/components/NavigationTop'
@@ -47,11 +47,13 @@ export async function getServerSideProps(ctx) {
     }
   }
   return {
-    props: { userData },
+    props: { userData, authToken },
   }
 }
-export default function Profile({ userData }) {
+const DEFAULT_IMAGE_PATH = '/images/pictures/default-avatar.png'
+export default function Profile({ userData, authToken }) {
   const { currentUser, setLogout } = useCurrentUser()
+  const [imagePath, setImagePath] = useState(userData?.imageUrl)
   const classes = useStyles()
   if (currentUser === null) {
     return <PageProgress />
@@ -59,8 +61,23 @@ export default function Profile({ userData }) {
   if (currentUser === undefined) {
     return <PageWarning />
   }
-  const handleUploadImage = e => {
-    console.log(e.target.files)
+  const handleUploadImage = async e => {
+    const options = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${authToken}`,
+      },
+    }
+    const formImage = new FormData()
+    const fileImage = e.target.files[0]
+    formImage.append('images', fileImage)
+    await axios
+      .post(`${process.env.BASE_URL}/api/upload/image`, formImage, options)
+      .then(response => {
+        const { currentUser } = response.data
+        setImagePath(currentUser.imageUrl)
+      })
+      .catch(error => console.log(error.response))
   }
   return (
     <Container header={<NavigationTop />} footer={<NavigationBottom />}>
@@ -85,7 +102,7 @@ export default function Profile({ userData }) {
               <label htmlFor='contained-button-file'>
                 <CardMedia
                   className={classes.profilePicture}
-                  image='/images/pictures/picture02.jpg'
+                  image={imagePath ?? DEFAULT_IMAGE_PATH}
                   title='Click to change your Avatar'
                 />
               </label>
@@ -99,4 +116,5 @@ export default function Profile({ userData }) {
 }
 Profile.propTypes = {
   userData: PropTypes.object,
+  authToken: PropTypes.string,
 }

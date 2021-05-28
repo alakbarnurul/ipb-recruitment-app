@@ -1,17 +1,18 @@
 export const dummyField = [
   {
-    type: 'textfield',
+    model: 'textfield',
+    type: 'text',
     name: 'name',
     label: 'Nama Lengkap',
   },
   {
-    type: 'autocomplete',
+    model: 'autocomplete',
     name: 'faculty',
     label: 'Fakultas',
     options: [{ title: 'FMIPA' }, { title: 'FEM' }, { title: 'FAPERTA' }],
   },
   {
-    type: 'checkbox',
+    model: 'checkbox',
     name: 'positions',
     label: 'Pilih divisi yang diminati',
     options: [
@@ -21,12 +22,12 @@ export const dummyField = [
     ],
   },
   {
-    type: 'textarea',
+    model: 'textarea',
     name: 'description',
     label: 'Deskripsikan dirimu',
   },
   {
-    type: 'radio',
+    model: 'radio',
     name: 'comitment',
     label: 'Komitmen Anda pada kepengurusan ini',
     options: [
@@ -37,12 +38,12 @@ export const dummyField = [
     ],
   },
   {
-    type: 'datepicker',
+    model: 'datepicker',
     name: 'interviewDate',
     label: 'Pilih jadwal interview',
   },
   {
-    type: 'file',
+    model: 'file',
     name: 'files',
     label: 'Unggah berkas Anda',
     filesLimit: 4,

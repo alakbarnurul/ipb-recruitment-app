@@ -1,12 +1,13 @@
-import prisma from '@/api/_src/utils/prisma'
+import prisma from '@/api/_src/libs/prisma'
 import verificationToken from '@/api/_src/utils/verificationToken'
 
 export default async function updateApplicantStatus(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' })
   }
-  const { authToken, status } = req.body
+  const { status } = req.body
   const { id } = req.query
+  const authToken = req.headers['authorization']
   // Auth Token
   const { data: organization, status: isValidToken } = verificationToken(authToken)
   if (!isValidToken) {

@@ -12,6 +12,12 @@ import { Alert } from '@material-ui/lab'
 const FormApplyCampaign = ({ campaignFields, initValues, initSchema }) => {
   const router = useRouter()
   const { currentAuthToken } = useCurrentUser()
+  const options = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${currentAuthToken}`,
+    },
+  }
   const [alertMessage, setAlertMessage] = useState({ status: '', message: '' })
   const [showAlert, setShowAlert] = useState(false)
   const initialValues = {
@@ -22,7 +28,7 @@ const FormApplyCampaign = ({ campaignFields, initValues, initSchema }) => {
   })
   const handleApply = async (values, { setSubmitting }) => {
     await axios
-      .post(`/api/campaign/apply/${router.query.id}`, { formData: { ...values }, authToken: currentAuthToken })
+      .post(`/api/campaign/apply/${router.query.id}`, { formData: { ...values } }, options)
       .then(response => {
         setAlertMessage({ status: 'success', message: 'Apply successfully! Check your history.' })
         console.log(response)

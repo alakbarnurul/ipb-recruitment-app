@@ -68,7 +68,8 @@ const FormProfile = ({ userData }) => {
           <Grid container direction='column' spacing={3}>
             <Grid item>
               <Field
-                type='textfield'
+                type='text'
+                model='textfield'
                 label='Nama lengkap'
                 name='fullName'
                 variant='standard'
@@ -79,7 +80,7 @@ const FormProfile = ({ userData }) => {
             <Grid item>
               <Field
                 options={[{ title: 'Laki-laki' }, { title: 'Perempuan' }]}
-                type='autocomplete'
+                model='autocomplete'
                 label='Jenis Kelamin'
                 name='gender'
                 variant='standard'
@@ -89,7 +90,8 @@ const FormProfile = ({ userData }) => {
             </Grid>
             <Grid item>
               <Field
-                type='textfield'
+                model='textfield'
+                type='text'
                 label='NIM'
                 name='nim'
                 variant='standard'
@@ -107,7 +109,7 @@ const FormProfile = ({ userData }) => {
                   { title: '54' },
                   { title: '55' },
                 ]}
-                type='autocomplete'
+                model='autocomplete'
                 label='Angkatan'
                 name='yearOfCollege'
                 variant='standard'
@@ -117,7 +119,8 @@ const FormProfile = ({ userData }) => {
             </Grid>
             <Grid item>
               <Field
-                type='textfield'
+                type='email'
+                model='textfield'
                 label='Email Address'
                 name='email'
                 variant='standard'
@@ -127,7 +130,7 @@ const FormProfile = ({ userData }) => {
             </Grid>
             <Grid item>
               <Field
-                type='datepicker'
+                model='datepicker'
                 label='Tanggal Lahir'
                 name='birthDate'
                 variant='standard'
@@ -147,7 +150,7 @@ const FormProfile = ({ userData }) => {
                   { title: 'FKH' },
                   { title: 'FATETA' },
                 ]}
-                type='autocomplete'
+                model='autocomplete'
                 label='Fakultas'
                 name='faculty'
                 variant='standard'
@@ -164,7 +167,7 @@ const FormProfile = ({ userData }) => {
                   { title: 'Teknologi Pangan' },
                   { title: 'Teknologi Perairan' },
                 ]}
-                type='autocomplete'
+                model='autocomplete'
                 label='Departemen'
                 name='department'
                 variant='standard'
@@ -174,7 +177,8 @@ const FormProfile = ({ userData }) => {
             </Grid>
             <Grid item>
               <Field
-                type='textfield'
+                type='text'
+                model='textfield'
                 label='Contact'
                 name='phoneNumber'
                 variant='standard'
