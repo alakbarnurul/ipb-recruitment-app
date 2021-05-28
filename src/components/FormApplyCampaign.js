@@ -58,7 +58,7 @@ const FormApplyCampaign = ({ campaignFields, initValues, initSchema }) => {
               </Grid>
             ))}
             <Grid item>
-              <Button color='primary' type='submit' fullWidth variant='contained'>
+              <Button disabled={formikProps.isSubmitting} color='primary' type='submit' fullWidth variant='contained'>
                 <Typography variant='subtitle2'>Apply</Typography>
               </Button>
             </Grid>

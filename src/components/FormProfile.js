@@ -42,12 +42,12 @@ const FormProfile = ({ userData }) => {
       .required('* Wajib diisi'),
     phoneNumber: Yup.string().required('* Wajib diisi'),
   })
-  const handleUpdateProfile = (values, { setSubmitting }) => [
+  const handleUpdateProfile = (values, { setSubmitting }) => {
     setTimeout(() => {
       console.log(values)
       setSubmitting(false)
-    }, 2000),
-  ]
+    }, 2000)
+  }
   return (
     <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleUpdateProfile}>
       {formikProps => (
@@ -183,7 +183,7 @@ const FormProfile = ({ userData }) => {
               />
             </Grid>
             <Grid item>
-              <Button color='primary' type='submit' fullWidth variant='contained'>
+              <Button disabled={formikProps.isSubmitting} color='primary' type='submit' fullWidth variant='contained'>
                 <Typography variant='subtitle2'>Update</Typography>
               </Button>
             </Grid>
